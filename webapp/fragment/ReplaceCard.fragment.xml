@@ -1,0 +1,53 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:sap.ui.layout.form="sap.ui.layout.form" xmlns:sap.ui.layout="sap.ui.layout"
+	xmlns="sap.m">
+	<MessageStrip class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom" type="Information" text="{i18n>messageRequiredInput}"
+		showIcon="true"/>
+	<sap.ui.layout.form:Form id="formReplaceCard" class="sapUiMediumMarginBottom" editable="true">
+		<sap.ui.layout.form:layout>
+			<sap.ui.layout.form:ResponsiveGridLayout adjustLabelSpan="true"/>
+		</sap.ui.layout.form:layout>
+		<sap.ui.layout.form:formContainers>
+			<sap.ui.layout.form:FormContainer>
+				<sap.ui.layout.form:formElements>
+					<sap.ui.layout.form:FormElement>
+						<sap.ui.layout.form:label>
+							<Label id="labelReplacementCardID" required="true" text="{i18n>labelReplacementCardID}"/>
+						</sap.ui.layout.form:label>
+						<sap.ui.layout.form:fields>
+							<Input id="inputReplacementCardID" placeholder="{i18n>inputPlaceHolderCardID}" width="200px" fieldWidth="80%" maxLength="16"
+								liveChange="onReplaceCardLiveChange" type="Number" enabled="{ViewModel>/inputReplacementCardIDEnabled}" description="for"/>
+						</sap.ui.layout.form:fields>
+					</sap.ui.layout.form:FormElement>
+					<sap.ui.layout.form:FormElement>
+						<sap.ui.layout.form:label>
+							<Label text="{i18n>labelBlockedCardID}"/>
+						</sap.ui.layout.form:label>
+						<sap.ui.layout.form:fields>
+							<Input value="{LoyaltyCardConfirmModel>/LoyaltyCardID}" width="200px" fieldWidth="80%" enabled="false" description="of"/>
+						</sap.ui.layout.form:fields>
+					</sap.ui.layout.form:FormElement>
+					<sap.ui.layout.form:FormElement>
+						<sap.ui.layout.form:label>
+							<Label text="{i18n>labelFirstNameInput}"/>
+						</sap.ui.layout.form:label>
+						<sap.ui.layout.form:fields>
+							<Text text="{LoyaltyCardConfirmModel>/Name}"/>
+						</sap.ui.layout.form:fields>
+					</sap.ui.layout.form:FormElement>
+					<sap.ui.layout.form:FormElement>
+						<sap.ui.layout.form:label>
+							<Label text="{i18n>labelSurnameInput}"/>
+						</sap.ui.layout.form:label>
+						<sap.ui.layout.form:fields>
+							<Text text="{LoyaltyCardConfirmModel>/Surname}" width="30%"/>
+						</sap.ui.layout.form:fields>
+					</sap.ui.layout.form:FormElement>
+					<sap.ui.layout.form:FormElement>
+						<Button text="{i18n>textButtonReplaceCard}" press="replaceCard" width="140px" type="Emphasized"
+							class="sapUiSmallMarginTop pnpReplaceCardUiLargeMarginBegin" enabled="{ViewModel>/btnReplaceCardEnabled}"/>
+					</sap.ui.layout.form:FormElement>
+				</sap.ui.layout.form:formElements>
+			</sap.ui.layout.form:FormContainer>
+		</sap.ui.layout.form:formContainers>
+	</sap.ui.layout.form:Form>
+</core:FragmentDefinition>

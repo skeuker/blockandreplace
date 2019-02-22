@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+	xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+	<edmx:DataServices m:DataServiceVersion="2.0">
+		<Schema Namespace="pnp.loyalty" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+			<EntityType Name="LoyaltyCard" sap:content-version="1">
+				<Key><PropertyRef Name="LoyaltyCardID"/></Key><Property Name="MemberName" Type="Edm.String"/><Property Name="MemberSurname" Type="Edm.String"/><Property Name="CardStatus" Type="Edm.String" Nullable="false"/><Property Name="LoyaltyCardID" Type="Edm.String" Nullable="false"/></EntityType>
+			<EntityContainer Name="pnp.loyalty_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx"><EntitySet Name="LoyaltyCards" EntityType="pnp.loyalty.LoyaltyCard" sap:content-version="1"/>
+				<FunctionImport Name="confirmLoyaltyCard" ReturnType="Collection(pnp.loyalty.LoyaltyCard)" EntitySet="LoyaltyCards" m:HttpMethod="GET"><Parameter Name="LoyaltyCardID" Type="Edm.String" Mode="In"/><Parameter Name="IDNumber" Type="Edm.String" Mode="In"/><Parameter Name="MobilePhoneNumber" Type="Edm.String" Mode="In"/><Parameter Name="Name" Type="Edm.String" Mode="In"/><Parameter Name="Surname" Type="Edm.String" Mode="In"/><Parameter Name="IDType" Type="Edm.String" Mode="In"/><Parameter Name="EMailAddress" Type="Edm.String" Mode="In"/></FunctionImport>
+				<FunctionImport Name="replaceCard" ReturnType="Collection(pnp.loyalty.LoyaltyCard)" EntitySet="LoyaltyCards" m:HttpMethod="GET"><Parameter Name="ReplacementCardID" Type="Edm.String" Mode="In"/><Parameter Name="LoyaltyCardID" Type="Edm.String" Mode="In"/></FunctionImport>
+			</EntityContainer><atom:link rel="self"
+				href="https://webidecp-a7be905be.dispatcher.hana.ondemand.com/destinations/CRD315/sap/opu/odata/pnp/LOY_BLOCKREPLACE_SRV/$metadata"
+				xmlns:atom="http://www.w3.org/2005/Atom"/><atom:link rel="latest-version"
+				href="https://webidecp-a7be905be.dispatcher.hana.ondemand.com/destinations/CRD315/sap/opu/odata/pnp/LOY_BLOCKREPLACE_SRV/$metadata"
+				xmlns:atom="http://www.w3.org/2005/Atom"/></Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

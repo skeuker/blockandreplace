@@ -1,0 +1,38 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	xmlns:semantic="sap.m.semantic" controllerName="pnp.blockandreplace.controller.BlockReplace" busy="{ViewModel>/busy}"
+	busyIndicatorDelay="{ViewModel>/busyDelay}">
+	<semantic:FullscreenPage title="{ViewModel>/viewTitle}" showNavButton="true" navButtonPress="onPressNavButton" showSubHeader="false">
+		<semantic:messagesIndicator>
+			<semantic:MessagesIndicator press="onMessagesButtonPress"/>
+		</semantic:messagesIndicator>
+		<semantic:content>
+			<MessageStrip id="msMessageStrip" showCloseButton="true" showIcon="true" text=""/>
+			<Wizard complete="onPressBlockReplaceWizardFinishButton" finishButtonText="{i18n>textBlockReplaceFinishButton}" id="wizBlockReplace"
+				showNextButton="true" enableBranching="true">
+				<WizardStep id="wizstepConfirmCard" icon="sap-icon://customer" title="{i18n>titleConfirmCardWizardStep}" validated="false"
+					nextStep="wizstepCardAction" complete="completeWizstepConfirmCard">
+					<content>
+						<core:Fragment fragmentName="pnp.blockandreplace.fragment.ConfirmCard" type="XML"/>
+					</content>
+				</WizardStep>
+				<WizardStep id="wizstepCardAction" icon="sap-icon://two-keys" title="{i18n>titleBlockOrUnblockWizardStep}" validated="false"
+					subsequentSteps="wizstepReplaceCard, wizstepFinishUp" complete="completeWizstepCardAction">
+					<content>
+						<core:Fragment fragmentName="pnp.blockandreplace.fragment.CardAction" type="XML"/>
+					</content>
+				</WizardStep>
+				<WizardStep id="wizstepReplaceCard" icon="sap-icon://write-new" title="{i18n>titleReplaceCardWizardStep}" validated="false"
+					nextStep="wizstepFinishUp" complete="completeWizstepReplaceCard">
+					<content>
+						<core:Fragment fragmentName="pnp.blockandreplace.fragment.ReplaceCard" type="XML"/>
+					</content>
+				</WizardStep>
+				<WizardStep id="wizstepFinishUp" icon="sap-icon://complete" title="{i18n>titleFinishUpWizardStep}" validated="true">
+					<content>
+						<core:Fragment fragmentName="pnp.blockandreplace.fragment.FinishUp" type="XML"/>
+					</content>
+				</WizardStep>
+			</Wizard>
+		</semantic:content>
+	</semantic:FullscreenPage>
+</mvc:View>

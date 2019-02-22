@@ -1,0 +1,32 @@
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+	<edmx:DataServices xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" m:DataServiceVersion="2.0">
+		<Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="pnp.loyalty">
+			<EntityType Name="LoyaltyCard">
+				<Key>
+					<PropertyRef Name="LoyaltyCardID"/>
+				</Key>
+				<Property Name="LoyaltyCardID" Type="Edm.String" Nullable="false" sap:label=""></Property>
+				<Property Name="MemberName" Type="Edm.String" Nullable="true"></Property>
+				<Property Name="MemberSurname" Type="Edm.String" Nullable="true"></Property>
+				<Property Name="CardStatus" Type="Edm.String" Nullable="false"></Property>
+				<Property Name="MemberID" Type="Edm.String" Nullable="true"></Property>
+			</EntityType>
+			<EntityContainer Name="EC1" m:IsDefaultEntityContainer="true">
+				<EntitySet Name="LoyaltyCards" EntityType="pnp.loyalty.LoyaltyCard"></EntitySet>
+				<FunctionImport Name="confirmCard" EntitySet="LoyaltyCards" ReturnType="Collection(pnp.loyalty.LoyaltyCard)" m:HttpMethod="GET">
+					<Parameter Name="LoyaltyCardID" Type="Edm.String"></Parameter>
+					<Parameter Name="IDNumber" Type="Edm.String"></Parameter>
+					<Parameter Name="IDType" Type="Edm.String"></Parameter>
+					<Parameter Name="MobilePhoneNumber" Type="Edm.String"></Parameter>
+					<Parameter Name="EMailAddress" Type="Edm.String"></Parameter>
+					<Parameter Name="Name" Type="Edm.String"></Parameter>
+					<Parameter Name="Surname" Type="Edm.String"></Parameter>
+				</FunctionImport>
+				<FunctionImport Name="replaceCard" EntitySet="LoyaltyCards" ReturnType="Collection(pnp.loyalty.LoyaltyCard)" m:HttpMethod="GET">
+					<Parameter Name="LoyaltyCardID" Type="Edm.String"></Parameter>
+					<Parameter Name="ReplacementCardID" Type="Edm.String"></Parameter>
+				</FunctionImport>
+			</EntityContainer>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

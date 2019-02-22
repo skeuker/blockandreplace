@@ -1,0 +1,16 @@
+{
+	"IDTypes": [{
+		"IDTypeID": "Z00003",
+		"IDTypeText": "Passport"
+	}, {
+		"IDTypeID": "Z00002",
+		"IDTypeText": "South African ID"
+	}],
+	"NextActions": [{
+		"NextActionID": "1",
+		"NextActionText": "Next: Replace card"
+	}, {
+		"NextActionID": "2",
+		"NextActionText": "I'm done here"
+	}]
+}
