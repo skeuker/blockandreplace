@@ -1,13 +1,13 @@
 sap.ui.define([
 	"pnp/blockandreplace/controller/Base.controller",
 	"sap/ui/model/json/JSONModel"
-], function (BaseController, JSONModel) {
+], function(BaseController, JSONModel) {
 	"use strict";
 
 	return BaseController.extend("pnp.blockandreplace.controller.BlockReplace", {
 
 		//initialization
-		onInit: function () {
+		onInit: function() {
 
 			//instantiate view model and set to view
 			this.oViewModel = new JSONModel({
@@ -49,7 +49,7 @@ sap.ui.define([
 		},
 
 		//event handler for view display
-		onDisplay: function () {
+		onDisplay: function() {
 
 			//hide message strip 
 			this.oMessageStrip.setVisible(false);
@@ -112,7 +112,7 @@ sap.ui.define([
 		},
 
 		//event handler for card confirmation form liveChange event
-		onCardConfirmLiveChange: function (oEvent) {
+		onCardConfirmLiveChange: function(oEvent) {
 
 			//hidde message strip as it might have be visible after card action
 			this.oMessageStrip.setVisible(false);
@@ -148,13 +148,13 @@ sap.ui.define([
 		 * Checks if there is any wrong inputs that can not be saved.
 		 * @private
 		 */
-		hasInvalidInput: function (aForms, oControl) {
+		hasInvalidInput: function(aForms, oControl) {
 
 			//local data declaration
 			var aInvalidFormFields = [];
 
 			//validate form input
-			aForms.forEach(function (oForm) {
+			aForms.forEach(function(oForm) {
 
 				//get all form fields
 				var aFormFields = this.getFormInputFields(oForm);
@@ -176,80 +176,80 @@ sap.ui.define([
 				if (/formConfirmCardAttributes/.test(oForm.getId())) {
 
 					//for each field on this form
-					aFormFields.forEach(function (oFormField) {
+					aFormFields.forEach(function(oFormField) {
 
 						//by field
 						switch (oFormField.sId) {
 
 							//loyalty card ID
-						case "inputLoyaltyCardID":
+							case "inputLoyaltyCardID":
 
-							//check whether entered loyalty card number is valid
-							if (!this.isValidLoyaltyCardID(oFormField.oControl.getValue())) {
-								oFormField.oControl.setValueState(sap.ui.core.ValueState.Error);
-								oFormField.oControl.setValueStateText(this.oResourceBundle.getText("messageInvalidInputLoyaltyCardID"));
-								oFormField.sInvalidInputMessage = this.oResourceBundle.getText("messageInvalidInputDetected");
-								aInvalidFormFields.push(oFormField);
-							}
-							break;
-
-							//phone number
-						case "inputMobileNumber":
-
-							//check telephone number contains only digits after stripping all non numeric content
-							if (!this.isValidPhoneNumber(oFormField.oControl.getValue())) {
-								oFormField.oControl.setValueState(sap.ui.core.ValueState.Error);
-								oFormField.oControl.setValueStateText(this.oResourceBundle.getText("messageInvalidInputPhoneNumber"));
-								oFormField.sInvalidInputMessage = this.oResourceBundle.getText("messageInvalidInputDetected");
-								aInvalidFormFields.push(oFormField);
-							}
-							break;
-
-							//SA ID number
-						case "inputIDNumber":
-
-							//only if ID type is SA ID number
-							if (this.getView().byId("cboxIdentificationType").getSelectedKey() === "Z00002") {
-
-								//check entered number is a SA ID number
-								if (!this.isValidSAIDNumber(oFormField.oControl.getValue())) {
+								//check whether entered loyalty card number is valid
+								if (!this.isValidLoyaltyCardID(oFormField.oControl.getValue())) {
 									oFormField.oControl.setValueState(sap.ui.core.ValueState.Error);
-									oFormField.oControl.setValueStateText(this.oResourceBundle.getText("messageInvalidInputSAIDNumber"));
+									oFormField.oControl.setValueStateText(this.oResourceBundle.getText("messageInvalidInputLoyaltyCardID"));
 									oFormField.sInvalidInputMessage = this.oResourceBundle.getText("messageInvalidInputDetected");
 									aInvalidFormFields.push(oFormField);
 								}
+								break;
 
-							}
+								//phone number
+							case "inputMobileNumber":
 
-							//only if ID type is passport number
-							if (this.getView().byId("cboxIdentificationType").getSelectedKey() === "Z00003") {
-
-								//check entered number is a valid passport number
-								if (!this.isValidPassportNumber(oFormField.oControl.getValue())) {
+								//check telephone number contains only digits after stripping all non numeric content
+								if (!this.isValidPhoneNumber(oFormField.oControl.getValue())) {
 									oFormField.oControl.setValueState(sap.ui.core.ValueState.Error);
-									oFormField.oControl.setValueStateText(this.oResourceBundle.getText("messageInvalidInputPassportNumber"));
+									oFormField.oControl.setValueStateText(this.oResourceBundle.getText("messageInvalidInputPhoneNumber"));
 									oFormField.sInvalidInputMessage = this.oResourceBundle.getText("messageInvalidInputDetected");
 									aInvalidFormFields.push(oFormField);
 								}
+								break;
 
-							}
-							break;
+								//SA ID number
+							case "inputIDNumber":
 
-							//email address
-						case "inputEMailAddress":
+								//only if ID type is SA ID number
+								if (this.getView().byId("cboxIdentificationType").getSelectedKey() === "Z00002") {
 
-							//check whether e-mail account entered is valid
-							if (!this.isValidEMailAddress(oFormField.oControl.getValue())) {
-								oFormField.oControl.setValueState(sap.ui.core.ValueState.Error);
-								oFormField.oControl.setValueStateText(this.oResourceBundle.getText("messageInvalidInputEMailAddress"));
-								oFormField.sInvalidInputMessage = this.oResourceBundle.getText("messageInvalidInputDetected");
-								aInvalidFormFields.push(oFormField);
-							}
-							break;
+									//check entered number is a SA ID number
+									if (!this.isValidSAIDNumber(oFormField.oControl.getValue())) {
+										oFormField.oControl.setValueState(sap.ui.core.ValueState.Error);
+										oFormField.oControl.setValueStateText(this.oResourceBundle.getText("messageInvalidInputSAIDNumber"));
+										oFormField.sInvalidInputMessage = this.oResourceBundle.getText("messageInvalidInputDetected");
+										aInvalidFormFields.push(oFormField);
+									}
 
-							//unvalidated fields
-						default:
-							break;
+								}
+
+								//only if ID type is passport number
+								if (this.getView().byId("cboxIdentificationType").getSelectedKey() === "Z00003") {
+
+									//check entered number is a valid passport number
+									if (!this.isValidPassportNumber(oFormField.oControl.getValue())) {
+										oFormField.oControl.setValueState(sap.ui.core.ValueState.Error);
+										oFormField.oControl.setValueStateText(this.oResourceBundle.getText("messageInvalidInputPassportNumber"));
+										oFormField.sInvalidInputMessage = this.oResourceBundle.getText("messageInvalidInputDetected");
+										aInvalidFormFields.push(oFormField);
+									}
+
+								}
+								break;
+
+								//email address
+							case "inputEMailAddress":
+
+								//check whether e-mail account entered is valid
+								if (!this.isValidEMailAddress(oFormField.oControl.getValue())) {
+									oFormField.oControl.setValueState(sap.ui.core.ValueState.Error);
+									oFormField.oControl.setValueStateText(this.oResourceBundle.getText("messageInvalidInputEMailAddress"));
+									oFormField.sInvalidInputMessage = this.oResourceBundle.getText("messageInvalidInputDetected");
+									aInvalidFormFields.push(oFormField);
+								}
+								break;
+
+								//unvalidated fields
+							default:
+								break;
 						}
 
 					}.bind(this));
@@ -260,35 +260,35 @@ sap.ui.define([
 				if (/formReplaceCard/.test(oForm.getId())) {
 
 					//for each field on this form
-					aFormFields.forEach(function (oFormField) {
+					aFormFields.forEach(function(oFormField) {
 
 						//by field
 						switch (oFormField.sId) {
 
 							//replacement card ID
-						case "inputReplacementCardID":
+							case "inputReplacementCardID":
 
-							//check whether entered replacement card number is valid
-							if (!this.isValidLoyaltyCardID(oFormField.oControl.getValue())) {
-								oFormField.oControl.setValueState(sap.ui.core.ValueState.Error);
-								oFormField.oControl.setValueStateText(this.oResourceBundle.getText("messageInvalidInputLoyaltyCardID"));
-								oFormField.sInvalidInputMessage = this.oResourceBundle.getText("messageInvalidInputDetected");
-								aInvalidFormFields.push(oFormField);
-							}
+								//check whether entered replacement card number is valid
+								if (!this.isValidLoyaltyCardID(oFormField.oControl.getValue())) {
+									oFormField.oControl.setValueState(sap.ui.core.ValueState.Error);
+									oFormField.oControl.setValueStateText(this.oResourceBundle.getText("messageInvalidInputLoyaltyCardID"));
+									oFormField.sInvalidInputMessage = this.oResourceBundle.getText("messageInvalidInputDetected");
+									aInvalidFormFields.push(oFormField);
+								}
 
-							//ensure replacement card and blocked card are not identical
-							var oBlockedCard = this.getView().getBindingContext("LoyaltyModel").getObject();
-							if (oBlockedCard.LoyaltyCardID === oFormField.oControl.getValue()) {
-								oFormField.oControl.setValueState(sap.ui.core.ValueState.Error);
-								oFormField.oControl.setValueStateText(this.oResourceBundle.getText("messageReplacementCardIDSameAsBlocked"));
-								oFormField.sInvalidInputMessage = this.oResourceBundle.getText("messageInvalidInputDetected");
-								aInvalidFormFields.push(oFormField);
-							}
-							break;
+								//ensure replacement card and blocked card are not identical
+								var oBlockedCard = this.getView().getBindingContext("LoyaltyModel").getObject();
+								if (oBlockedCard.LoyaltyCardID === oFormField.oControl.getValue()) {
+									oFormField.oControl.setValueState(sap.ui.core.ValueState.Error);
+									oFormField.oControl.setValueStateText(this.oResourceBundle.getText("messageReplacementCardIDSameAsBlocked"));
+									oFormField.sInvalidInputMessage = this.oResourceBundle.getText("messageInvalidInputDetected");
+									aInvalidFormFields.push(oFormField);
+								}
+								break;
 
-							//unvalidated fields
-						default:
-							break;
+								//unvalidated fields
+							default:
+								break;
 						}
 
 					}.bind(this));
@@ -306,7 +306,7 @@ sap.ui.define([
 		 * Checks for error messages bound in model
 		 * @private
 		 */
-		hasErrorMessages: function () {
+		hasErrorMessages: function() {
 
 			//to be implemented in extension controller derived from base controller
 			return false;
@@ -314,7 +314,7 @@ sap.ui.define([
 		},
 
 		//confirm card against backend
-		confirmCard: function () {
+		confirmCard: function() {
 
 			//hide message strip 
 			this.oMessageStrip.setVisible(false);
@@ -331,18 +331,13 @@ sap.ui.define([
 			//get provided card attributes for confirmation
 			var oLoyaltyCardConfirm = this.getView().getBindingContext("LoyaltyCardConfirmModel").getObject();
 
-			//where update of Card Confirm JSON Model has not yet been performed
-			if (!oLoyaltyCardConfirm.IDNumber) {
-				oLoyaltyCardConfirm.IDNumber = this.getView().byId("inputIDNumber").getValue();
-			}
-
 			//confirm card with provided attributes
 			this.getModel("LoyaltyModel").callFunction("/confirmCard", {
 
 				//url paramters
 				urlParameters: {
 					"LoyaltyCardID": oLoyaltyCardConfirm.LoyaltyCardID,
-					"IDNumber": oLoyaltyCardConfirm.IDNumber,
+					"IDNumber": this.getView().byId("inputIDNumber").getValue(),
 					"IDType": oLoyaltyCardConfirm.IDType,
 					"MobilePhoneNumber": oLoyaltyCardConfirm.MobilePhoneNumber,
 					"EMailAddress": oLoyaltyCardConfirm.EMailAddress,
@@ -351,7 +346,7 @@ sap.ui.define([
 				},
 
 				//on receipt of card confirmation results
-				success: function (oData, oResponse) {
+				success: function(oData, oResponse) {
 
 					//require further user decision where more than one card
 					if (oData.results.length > 1) {
@@ -361,7 +356,7 @@ sap.ui.define([
 
 						//create a popover to select a card from the list of cards
 						var oCardSelectPopover = sap.ui.xmlfragment("pnp.blockandreplace.fragment.CardSelectPopover", this);
-						oCardSelectPopover.attachAfterClose(function () {
+						oCardSelectPopover.attachAfterClose(function() {
 							oCardSelectPopover.destroy();
 						});
 						this.getView().addDependent(oCardSelectPopover);
@@ -374,7 +369,7 @@ sap.ui.define([
 
 						// delay because addDependent will do a async rerendering 
 						var oInputLoyaltyCardID = this.getView().byId("inputLoyaltyCardID");
-						jQuery.sap.delayedCall(0, this, function () {
+						jQuery.sap.delayedCall(0, this, function() {
 							oCardSelectPopover.openBy(oInputLoyaltyCardID);
 						});
 
@@ -389,7 +384,7 @@ sap.ui.define([
 				}.bind(this),
 
 				//error callback function
-				error: function (oError) {
+				error: function(oError) {
 
 					//invalidate card confirm step
 					this.oBlockReplaceWizard.invalidateStep(oConfirmCardWizStep);
@@ -416,7 +411,7 @@ sap.ui.define([
 		},
 
 		//set confirmed loyalty card
-		setConfirmedLoyaltyCardID: function (sLoyaltyCardID) {
+		setConfirmedLoyaltyCardID: function(sLoyaltyCardID) {
 
 			//get confirm card wizard step
 			var oConfirmCardWizStep = this.getView().byId("wizstepConfirmCard");
@@ -442,7 +437,7 @@ sap.ui.define([
 			});
 
 			//set binding context to confirmed loyalty card
-			this.oLoyaltyModel.createBindingContext(sLoyaltyCardPath, null, {}, function (oLoyaltyCardContext) {
+			this.oLoyaltyModel.createBindingContext(sLoyaltyCardPath, null, {}, function(oLoyaltyCardContext) {
 
 				//set new binding context
 				this.getView().setBindingContext(oLoyaltyCardContext, "LoyaltyModel");
@@ -452,14 +447,14 @@ sap.ui.define([
 				switch (oLoyaltyCard.CardStatus) {
 
 					//card is currently 'Active'
-				case "Active":
-					this.getModel("ViewModel").setProperty("/toggleCardStatusButtonText", this.getResourceBundle().getText("textButtonBlockCard"));
-					break;
+					case "Active":
+						this.getModel("ViewModel").setProperty("/toggleCardStatusButtonText", this.getResourceBundle().getText("textButtonBlockCard"));
+						break;
 
-					//card is currently 'Blocked'
-				case "Blocked":
-					this.getModel("ViewModel").setProperty("/toggleCardStatusButtonText", this.getResourceBundle().getText("textButtonUnblockCard"));
-					break;
+						//card is currently 'Blocked'
+					case "Blocked":
+						this.getModel("ViewModel").setProperty("/toggleCardStatusButtonText", this.getResourceBundle().getText("textButtonUnblockCard"));
+						break;
 
 				}
 
@@ -471,7 +466,7 @@ sap.ui.define([
 		},
 
 		//on completion of card confirmation wizard step
-		completeWizstepConfirmCard: function (oEvent) {
+		completeWizstepConfirmCard: function(oEvent) {
 
 			//set card confirmation form to no longer editable
 			this.setFormInputControlsEnabled([this.getView().byId("formConfirmCardAttributes")], false);
@@ -479,7 +474,7 @@ sap.ui.define([
 		},
 
 		//on completion of card action wizard step
-		completeWizstepCardAction: function (oEvent) {
+		completeWizstepCardAction: function(oEvent) {
 
 			//disable action select control
 			this.getModel("ViewModel").setProperty("/cboxNextActionEnabled", false);
@@ -490,7 +485,7 @@ sap.ui.define([
 		},
 
 		//on completion of replace card wizard step
-		completeWizstepReplaceCard: function (oEvent) {
+		completeWizstepReplaceCard: function(oEvent) {
 
 			//hide message strip as it might have be visible after card action
 			this.oMessageStrip.setVisible(false);
@@ -498,7 +493,7 @@ sap.ui.define([
 		},
 
 		//continue without card status change
-		continueWithoutCardStatusChange: function () {
+		continueWithoutCardStatusChange: function() {
 
 			//set 'Replace card' as next action
 			this.getModel("ViewModel").setProperty("/cboxNextActionEnabled", true);
@@ -524,7 +519,7 @@ sap.ui.define([
 		},
 
 		//toggle loyalty card status
-		toggleCardStatus: function () {
+		toggleCardStatus: function() {
 
 			//get loyalty card instance
 			var oLoyaltyCard = this.getView().getBindingContext("LoyaltyModel").getObject();
@@ -533,24 +528,24 @@ sap.ui.define([
 			switch (oLoyaltyCard.CardStatus) {
 
 				//card is currently 'Active'
-			case "Active":
+				case "Active":
 
-				//update card to 'Blocked' status
-				this.updateCardStatus("Blocked");
-				break;
+					//update card to 'Blocked' status
+					this.updateCardStatus("Blocked");
+					break;
 
-				//card is currently 'Blocked'	
-			case "Blocked":
+					//card is currently 'Blocked'	
+				case "Blocked":
 
-				//update card to 'Active' status
-				this.updateCardStatus("Active");
-				break;
+					//update card to 'Active' status
+					this.updateCardStatus("Active");
+					break;
 			}
 
 		},
 
 		//block loyalty card
-		updateCardStatus: function (sCardStatus) {
+		updateCardStatus: function(sCardStatus) {
 
 			//remove all messages from the message manager
 			this.oMessageManager.removeAllMessages();
@@ -576,7 +571,7 @@ sap.ui.define([
 			this.oLoyaltyModel.submitChanges({
 
 				//update success handler
-				success: function (oData, oResponse) {
+				success: function(oData, oResponse) {
 
 					//inspect batchResponses for errors and visualize
 					if (this.hasODataBatchErrorResponse(oData.__batchResponses)) {
@@ -604,37 +599,37 @@ sap.ui.define([
 					switch (sCardStatus) {
 
 						//card was activated, proceed to finish	
-					case "Active":
+						case "Active":
 
-						//exclude replace action for an active card
-						this.getView().byId("cboxNextAction").getBinding("items").filter(
-							new sap.ui.model.Filter({
-								path: 'NextActionID',
-								operator: "NE",
-								value1: "1"
-							}));
+							//exclude replace action for an active card
+							this.getView().byId("cboxNextAction").getBinding("items").filter(
+								new sap.ui.model.Filter({
+									path: 'NextActionID',
+									operator: "NE",
+									value1: "1"
+								}));
 
-						//set 'Finish up' as next action
-						this.getView().byId("cboxNextAction").setSelectedKey("2"); //Replace card
+							//set 'Finish up' as next action
+							this.getView().byId("cboxNextAction").setSelectedKey("2"); //Replace card
 
-						//set 'Replace card' as next step
-						oCardActionWizStep.setNextStep(this.getView().byId("wizstepFinishUp"));
+							//set 'Replace card' as next step
+							oCardActionWizStep.setNextStep(this.getView().byId("wizstepFinishUp"));
 
-						break;
+							break;
 
-						//card was blocked, proceed to replace
-					case "Blocked":
+							//card was blocked, proceed to replace
+						case "Blocked":
 
-						//unfilter to ensure that all are displayed
-						this.getView().byId("cboxNextAction").getBinding("items").filter([]);
+							//unfilter to ensure that all are displayed
+							this.getView().byId("cboxNextAction").getBinding("items").filter([]);
 
-						//set 'Replace card' as next action
-						this.getView().byId("cboxNextAction").setSelectedKey("1"); //Replace card
+							//set 'Replace card' as next action
+							this.getView().byId("cboxNextAction").setSelectedKey("1"); //Replace card
 
-						//set 'Replace card' as next step
-						oCardActionWizStep.setNextStep(this.getView().byId("wizstepReplaceCard"));
+							//set 'Replace card' as next step
+							oCardActionWizStep.setNextStep(this.getView().byId("wizstepReplaceCard"));
 
-						break;
+							break;
 					}
 
 					//validate card action wizard step
@@ -649,7 +644,7 @@ sap.ui.define([
 				}.bind(this),
 
 				//error handler callback function
-				error: function (oError) {
+				error: function(oError) {
 
 					//reset loyalty card status change
 					this.getModel("LoyaltyModel").resetChanges();
@@ -664,7 +659,7 @@ sap.ui.define([
 		},
 
 		//replace loyalty card
-		replaceCard: function () {
+		replaceCard: function() {
 
 			//remove all messages from the message manager
 			this.oMessageManager.removeAllMessages();
@@ -691,7 +686,7 @@ sap.ui.define([
 				},
 
 				//on receipt of card confirmation results
-				success: function (oData, oResponse) {
+				success: function(oData, oResponse) {
 
 					//inspect batchResponses for errors and visualize
 					if (this.hasODataBatchErrorResponse(oData.__batchResponses)) {
@@ -736,7 +731,7 @@ sap.ui.define([
 				}.bind(this),
 
 				//error callback function
-				error: function (oError) {
+				error: function(oError) {
 
 					//render OData error response
 					this.renderODataErrorResponse(oError, "messageCardUpdateFailed");
@@ -748,7 +743,7 @@ sap.ui.define([
 		},
 
 		//on change of requested next action
-		onNextActionChange: function (oEvent) {
+		onNextActionChange: function(oEvent) {
 
 			//get card action wizard step
 			var oCardActionWizStep = this.getView().byId("wizstepCardAction");
@@ -757,25 +752,25 @@ sap.ui.define([
 			switch (oEvent.getParameter("selectedItem").getKey()) {
 
 				//replace card
-			case "1":
+				case "1":
 
-				//set 'Replace card' as next step
-				oCardActionWizStep.setNextStep(this.getView().byId("wizstepReplaceCard"));
-				break;
+					//set 'Replace card' as next step
+					oCardActionWizStep.setNextStep(this.getView().byId("wizstepReplaceCard"));
+					break;
 
-				//finish up
-			case "2":
+					//finish up
+				case "2":
 
-				//set 'Finish up' as next step
-				oCardActionWizStep.setNextStep(this.getView().byId("wizstepFinishUp"));
-				break;
+					//set 'Finish up' as next step
+					oCardActionWizStep.setNextStep(this.getView().byId("wizstepFinishUp"));
+					break;
 
 			}
 
 		},
 
 		//event handler for replacement card ID entry
-		onReplaceCardLiveChange: function (oEvent) {
+		onReplaceCardLiveChange: function(oEvent) {
 
 			//hidde message strip as it might have be visible after card action
 			this.oMessageStrip.setVisible(false);
@@ -798,7 +793,7 @@ sap.ui.define([
 		},
 
 		//on completion of block and replace card wizard
-		onPressBlockReplaceWizardFinishButton: function () {
+		onPressBlockReplaceWizardFinishButton: function() {
 
 			//reset and restart wizard for block and replace
 			this.getRouter().getTarget("BlockReplace").display();
@@ -806,7 +801,7 @@ sap.ui.define([
 		},
 
 		//adopt selected card as card to be acted on
-		onPressCardSelectDialogListItem: function (oEvent) {
+		onPressCardSelectDialogListItem: function(oEvent) {
 
 			//close popover
 			sap.ui.getCore().byId("popCardSelect").close();
@@ -816,6 +811,28 @@ sap.ui.define([
 
 			//set confirmed loyalty card ID to UI
 			this.setConfirmedLoyaltyCardID(oLoyaltyCard.LoyaltyCardID);
+
+		},
+
+		//One Time Pin component has been created
+		onOneTimePinComponentCreated: function(oEvent) {
+
+			//get access to the One Time Pin
+			var oOneTimePinComponent = oEvent.getParameter("component");
+
+			//attach to OneTimePinValidated event
+			oOneTimePinComponent.attachOneTimePinValidated(this.onOneTimePinValidated);
+
+		},
+
+		//on One Time Pin validated
+		onOneTimePinValidated: function() {
+			
+			//get verify One Time PIN wizard step
+			var oVerifyOneTimePinWizStep = this.getView().byId("wizstepVerifyOneTimePin");
+
+			//validate verify One Time Pin wizard step
+			this.oBlockReplaceWizard.validateStep(oVerifyOneTimePinWizStep);
 
 		}
 

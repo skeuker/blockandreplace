@@ -55,6 +55,21 @@
 				"sap.ui.layout": {},
 				"sap.ui.core": {},
 				"sap.m": {}
+			},
+			"components": {
+				"pnp.onetimepin": {
+					"lazy": false
+				}
+			}
+		},
+		"resourceRoots": {
+			"pnp.onetimepin": "../sap/bc/ui5_ui5/pnp/onetimepin/"
+		},
+		"componentUsages": {
+			"OneTimePin": {
+				"name": "pnp.onetimepin",
+				"settings": {},
+				"componentData": {}
 			}
 		},
 		"contentDensities": {
@@ -85,11 +100,9 @@
 			}
 		},
 		"resources": {
-			"css": [
-				{
-					"uri": "css/style.css"
-				}
-			]
+			"css": [{
+				"uri": "css/style.css"
+			}]
 		},
 		"routing": {
 			"config": {
@@ -101,15 +114,13 @@
 				"controlId": "idAppControl",
 				"clearControlAggregation": false
 			},
-			"routes": [
-				{
-					"name": "BlockReplace",
-					"pattern": "",
-					"target": [
-						"BlockReplace"
-					]
-				}
-			],
+			"routes": [{
+				"name": "BlockReplace",
+				"pattern": "",
+				"target": [
+					"BlockReplace"
+				]
+			}],
 			"targets": {
 				"BlockReplace": {
 					"viewType": "XML",
