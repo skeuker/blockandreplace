@@ -380,7 +380,7 @@ sap.ui.define([
 
 					//set confirmed loyalty card ID
 					this.setConfirmedLoyaltyCardID(oData.results[0].LoyaltyCardID);
-
+					
 				}.bind(this),
 
 				//error callback function
@@ -457,7 +457,10 @@ sap.ui.define([
 						break;
 
 				}
-
+			
+				//go to verify One Time Pin wizard step
+				this.oBlockReplaceWizard.nextStep();
+				
 				//view is no longer busy
 				this.getModel("ViewModel").setProperty("/busy", false);
 
@@ -822,6 +825,9 @@ sap.ui.define([
 
 			//attach to OneTimePinValidated event
 			oOneTimePinComponent.attachOneTimePinValidated(this.onOneTimePinValidated);
+			
+			//provide message strip instance to One Time Pin component
+			oOneTimePinComponent.setOuterMessageStrip(this.byId("msMessageStrip"));
 
 		},
 
@@ -833,6 +839,9 @@ sap.ui.define([
 
 			//validate verify One Time Pin wizard step
 			this.oBlockReplaceWizard.validateStep(oVerifyOneTimePinWizStep);
+			
+			//move wizard to next step
+			this.oBlockReplaceWizard.nextStep();
 
 		}
 
