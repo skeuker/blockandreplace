@@ -42,7 +42,7 @@
 						</sap.ui.layout.form:label>
 						<sap.ui.layout.form:fields>
 							<Input fieldWidth="50%" id="inputEMailAddress" liveChange="onCardConfirmLiveChange" placeholder="{i18n>inputPlaceholderEMailAddress}"
-								type="Email" value="{LoyaltyCardConfirmModel>/EMailAddress}" width="400px"/>
+								type="Email" value="{LoyaltyCardConfirmModel>/EMailAddress}" width="350px"/>
 						</sap.ui.layout.form:fields>
 					</sap.ui.layout.form:FormElement>
 					<sap.ui.layout.form:FormElement>

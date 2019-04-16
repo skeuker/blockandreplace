@@ -1,0 +1,6 @@
+{
+  "deploy": {
+    "destination": "SMD100",
+    "name": "/PNP/BLOCKREPLACE"
+  }
+}

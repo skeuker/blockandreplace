@@ -4,32 +4,32 @@ sap.ui.define([
 ], function (UI5Object, MessageBox) {
 	"use strict";
 
-	return UI5Object.extend("pnp.survey.controller.ErrorHandler", {
+	return UI5Object.extend("pnp.blockandreplace.util.ErrorHandler", {
 
 		/**
 		 * Handles application errors by automatically attaching to the model events and displaying errors when needed.
 		 * @class
 		 * @param {sap.ui.core.UIComponent} oComponent reference to the app's component
 		 * @public
-		 * @alias pnp.survey.controller.ErrorHandler
+		 * @alias pnp.blockandreplace.util.ErrorHandler
 		 */
 		constructor: function (oComponent) {
 
 			//set instance attributes
 			this.oResourceBundle = oComponent.getModel("i18n").getResourceBundle();
 			this.oComponent = oComponent;
-			this.oSurveyModel = oComponent.getModel("SurveyModel");
+			this.oLoyaltyModel = oComponent.getModel("LoyaltyModel");
 			this.bMessageBoxOpen = false;
 			this._sErrorText = this.oResourceBundle.getText("messageODataError");
 
 			//attach error handler for metadata load failure
-			this.oSurveyModel.attachMetadataFailed(function (oEvent) {
+			this.oLoyaltyModel.attachMetadataFailed(function (oEvent) {
 				var oParams = oEvent.getParameters();
 				this.showServiceError(oParams.response);
 			}, this);
 
 			//attach error handler for unhandled OData service request errors
-			this.oSurveyModel.attachRequestFailed(function (oEvent) {
+			this.oLoyaltyModel.attachRequestFailed(function (oEvent) {
 
 				//get service request failure event
 				var oParams = oEvent.getParameters();

@@ -380,7 +380,7 @@ sap.ui.define([
 
 					//set confirmed loyalty card ID
 					this.setConfirmedLoyaltyCardID(oData.results[0].LoyaltyCardID);
-					
+
 				}.bind(this),
 
 				//error callback function
@@ -412,6 +412,12 @@ sap.ui.define([
 
 		//set confirmed loyalty card
 		setConfirmedLoyaltyCardID: function(sLoyaltyCardID) {
+
+			//local data declaration
+			var aMeansOfCommunication = [];
+
+			//get attributes that were provided for confirmation
+			var oLoyaltyCardConfirm = this.getView().getBindingContext("LoyaltyCardConfirmModel").getObject();
 
 			//get confirm card wizard step
 			var oConfirmCardWizStep = this.getView().byId("wizstepConfirmCard");
@@ -457,10 +463,31 @@ sap.ui.define([
 						break;
 
 				}
-			
+
+				//construct array of means of communication to deliver OTP
+				if (oLoyaltyCardConfirm.MobilePhoneNumber) {
+					aMeansOfCommunication.push({
+						"MoCID": "0",
+						"MoCValue": oLoyaltyCardConfirm.MobilePhoneNumber
+					});
+				}
+
+				//eMail address is available for OTP delivery
+				if (oLoyaltyCardConfirm.EMailAddress) {
+					aMeansOfCommunication.push({
+						"MoCID": "1",
+						"MoCValue": oLoyaltyCardConfirm.EMailAddress
+					})
+				};
+
+				//provide means of communication to deliver the OTP
+				if (this.oOneTimePinComponent) {
+					this.oOneTimePinComponent.setMeansOfCommunication(aMeansOfCommunication);
+				}
+
 				//go to verify One Time Pin wizard step
 				this.oBlockReplaceWizard.nextStep();
-				
+
 				//view is no longer busy
 				this.getModel("ViewModel").setProperty("/busy", false);
 
@@ -821,25 +848,25 @@ sap.ui.define([
 		onOneTimePinComponentCreated: function(oEvent) {
 
 			//get access to the One Time Pin
-			var oOneTimePinComponent = oEvent.getParameter("component");
+			this.oOneTimePinComponent = oEvent.getParameter("component");
 
 			//attach to OneTimePinValidated event
-			oOneTimePinComponent.attachOneTimePinValidated(this.onOneTimePinValidated);
-			
+			this.oOneTimePinComponent.attachOneTimePinValidated(this.onOneTimePinValidated);
+
 			//provide message strip instance to One Time Pin component
-			oOneTimePinComponent.setOuterMessageStrip(this.byId("msMessageStrip"));
+			this.oOneTimePinComponent.setOuterMessageStrip(this.byId("msMessageStrip"));
 
 		},
 
 		//on One Time Pin validated
 		onOneTimePinValidated: function() {
-			
+
 			//get verify One Time PIN wizard step
 			var oVerifyOneTimePinWizStep = this.getView().byId("wizstepVerifyOneTimePin");
 
 			//validate verify One Time Pin wizard step
 			this.oBlockReplaceWizard.validateStep(oVerifyOneTimePinWizStep);
-			
+
 			//move wizard to next step
 			this.oBlockReplaceWizard.nextStep();
 

@@ -10,15 +10,9 @@
 			<Wizard complete="onPressBlockReplaceWizardFinishButton" finishButtonText="{i18n>textBlockReplaceFinishButton}" id="wizBlockReplace"
 				showNextButton="true" enableBranching="true">
 				<WizardStep id="wizstepConfirmCard" icon="sap-icon://customer" title="{i18n>titleConfirmCardWizardStep}" validated="false"
-					nextStep="wizstepVerifyOneTimePin" complete="completeWizstepConfirmCard">
+					nextStep="wizstepCardAction" complete="completeWizstepConfirmCard">
 					<content>
 						<core:Fragment fragmentName="pnp.blockandreplace.fragment.ConfirmCard" type="XML"/>
-					</content>
-				</WizardStep>
-				<WizardStep id="wizstepVerifyOneTimePin" icon="sap-icon://customer" title="{i18n>titleVerifyOneTimePinWizardStep}" validated="false"
-					nextStep="wizstepCardAction" complete="completeWizstepVerifyOneTimePin">
-					<content>
-						<core:Fragment fragmentName="pnp.blockandreplace.fragment.VerifyOneTimePin" type="XML"/>
 					</content>
 				</WizardStep>
 				<WizardStep id="wizstepCardAction" icon="sap-icon://two-keys" title="{i18n>titleBlockOrUnblockWizardStep}" validated="false"
