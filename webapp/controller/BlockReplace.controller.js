@@ -478,12 +478,18 @@ sap.ui.define([
 					aMeansOfCommunication.push({
 						"MoCID": "1",
 						"MoCValue": oLoyaltyCardConfirm.EMailAddress
-					})
-				};
+					});
+				}
 
-				//provide means of communication to deliver the OTP
+				//provide input to One Time Pin component
 				if (this.oOneTimePinComponent) {
+					
+					//set means of communication how to deliver OTP
 					this.oOneTimePinComponent.setMeansOfCommunication(aMeansOfCommunication);
+					
+					//set One Time Purpose
+					this.oOneTimePinComponent.setOTPPurpose("Block & Replace");
+					
 				}
 
 				//go to verify One Time Pin wizard step
@@ -852,7 +858,7 @@ sap.ui.define([
 			this.oOneTimePinComponent = oEvent.getParameter("component");
 
 			//attach to OneTimePinValidated event
-			this.oOneTimePinComponent.attachOneTimePinValidated(this.onOneTimePinValidated);
+			this.oOneTimePinComponent.attachOneTimePinValidated(this.onOneTimePinValidated, this);
 
 			//provide message strip instance to One Time Pin component
 			this.oOneTimePinComponent.setOuterMessageStrip(this.byId("msMessageStrip"));
