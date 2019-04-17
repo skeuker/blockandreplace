@@ -6,4 +6,5 @@ sap.ui.define([
 	return Controller.extend("pnp.blockandreplace.controller.App", {
 
 	});
+	
 });

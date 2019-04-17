@@ -136,9 +136,10 @@ sap.ui.define([
 				this.oBlockReplaceWizard.invalidateStep(oConfirmCardWizStep);
 			}
 
-			//confirm card against backend when not previously failed to validate and all input correct
+			//confirm card against backend when all input correct, not previously failed to validate and ID type not passport
 			if (!this.hasIncorrectInput([this.getView().byId("formConfirmCardAttributes")], oEvent.getSource()) &&
-				!this.getModel("ViewModel").getProperty("/bCardValidationFailed")) {
+				!this.getView().byId("cboxIdentificationType").getSelectedKey() !== "Z00003" && 
+				!this.getModel("ViewModel").getProperty("/bCardValidationFailed")){
 				this.confirmCard();
 			}
 

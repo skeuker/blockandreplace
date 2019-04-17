@@ -76,7 +76,7 @@
 								liveChange="onCardConfirmLiveChange" enabled="true"/>
 						</sap.ui.layout.form:fields>
 					</sap.ui.layout.form:FormElement>
-					<sap.ui.layout.form:FormElement visible="{= ${ViewModel>/bCardValidationFailed}? true : false }">
+					<sap.ui.layout.form:FormElement visible="{= ${ViewModel>/bCardValidationFailed} || ${LoyaltyCardConfirmModel>/IDType} === 'Z00003' ? true : false }">
 						<sap.ui.layout.form:fields>
 							<Button text="{i18n>textButtonConfirmCard}" press="confirmCard" width="140px" type="Transparent"
 								class="sapUiSmallMarginTop sapUiSmallMarginBegin"/>

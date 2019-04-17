@@ -2,5 +2,10 @@
   "deploy": {
     "destination": "SMD100",
     "name": "/PNP/BLOCKREPLACE"
+  },
+  "basevalidator": {
+    "services": {
+      "js": "fioriJsValidator"
+    }
   }
 }

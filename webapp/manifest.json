@@ -55,6 +55,23 @@
 				"sap.ui.layout": {},
 				"sap.ui.core": {},
 				"sap.m": {}
+			},
+			"components": {
+				"pnp.onetimepin": {
+					"lazy": false
+				}
+			}
+		},
+		"resourceRoots": {
+			"pnp.onetimepin": "../sap/bc/ui5_ui5/pnp/onetimepin/"
+		},
+		"componentUsages": {
+			"OneTimePin": {
+				"name": "pnp.onetimepin",
+				"settings": {},
+				"componentData": {
+					"sOTPPurpose": "Block & Replace"
+				}
 			}
 		},
 		"contentDensities": {
