@@ -138,7 +138,7 @@ sap.ui.define([
 
 			//confirm card against backend when all input correct, not previously failed to validate and ID type not passport
 			if (!this.hasIncorrectInput([this.getView().byId("formConfirmCardAttributes")], oEvent.getSource()) &&
-				!this.getView().byId("cboxIdentificationType").getSelectedKey() !== "Z00003" && 
+				this.getView().byId("cboxIdentificationType").getSelectedKey() !== "Z00003" && 
 				!this.getModel("ViewModel").getProperty("/bCardValidationFailed")){
 				this.confirmCard();
 			}
@@ -482,6 +482,9 @@ sap.ui.define([
 
 				//provide input to One Time Pin component
 				if (this.oOneTimePinComponent) {
+					
+					//initialize One Time Pin delivery
+					this.oOneTimePinComponent.initializeForOTPDelivery();
 					
 					//set means of communication how to deliver OTP
 					this.oOneTimePinComponent.setMeansOfCommunication(aMeansOfCommunication);
