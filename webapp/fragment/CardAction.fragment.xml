@@ -8,12 +8,18 @@
 			<sap.ui.layout.form:FormContainer>
 				<sap.ui.layout.form:formElements>
 					<sap.ui.layout.form:FormElement>
-						<GenericTile backgroundImage="images/smartshoppercard.jpg" frameType="TwoByOne" class="sapUiSmallMarginTop sapUiLargeMarginBegin"
-							headerImage="{= ${LoyaltyModel>CardStatus} === 'Active'? 'sap-icon://status-positive' : 'sap-icon://status-negative' }">
-							<TileContent footer="{= 'Card number: ' + ${LoyaltyModel>LoyaltyCardID} }">
-								<NewsContent contentText="{= ${LoyaltyModel>MemberName} + ' ' + ${LoyaltyModel>MemberSurname} }" subheader="{LoyaltyModel>CardStatus}"/>
-							</TileContent>
-						</GenericTile>
+						<sap.ui.layout.form:fields>
+							<GenericTile backgroundImage="images/smartshoppercard.jpg" frameType="TwoByOne" class="sapUiSmallMarginTop sapUiLargeMarginBegin"
+								headerImage="{= ${LoyaltyModel>CardStatus} === 'Active'? 'sap-icon://status-positive' : 'sap-icon://status-negative' }">
+								<tileContent>
+									<TileContent footer="{= 'Card number: ' + ${LoyaltyModel>LoyaltyCardID} }">
+										<content>
+											<NewsContent contentText="{= ${LoyaltyModel>MemberName} + ' ' + ${LoyaltyModel>MemberSurname} }" subheader="{LoyaltyModel>CardStatus}"/>
+										</content>
+									</TileContent>
+								</tileContent>
+							</GenericTile>
+						</sap.ui.layout.form:fields>
 					</sap.ui.layout.form:FormElement>
 					<sap.ui.layout.form:FormElement visible="{= ${ViewModel>/cboxNextActionVisible} === true? false : true }">
 						<HBox>

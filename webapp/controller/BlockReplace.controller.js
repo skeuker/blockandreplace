@@ -379,8 +379,8 @@ sap.ui.define([
 
 					}
 
-					//set confirmed loyalty card ID
-					this.setConfirmedLoyaltyCardID(oData.results[0].LoyaltyCardID);
+					//set confirmed loyalty card
+					this.setConfirmedLoyaltyCard(oData.results[0]);
 
 				}.bind(this),
 
@@ -412,13 +412,10 @@ sap.ui.define([
 		},
 
 		//set confirmed loyalty card
-		setConfirmedLoyaltyCardID: function(sLoyaltyCardID) {
+		setConfirmedLoyaltyCard: function(oLoyaltyCard) {
 
 			//local data declaration
 			var aMeansOfCommunication = [];
-
-			//get attributes that were provided for confirmation
-			var oLoyaltyCardConfirm = this.getView().getBindingContext("LoyaltyCardConfirmModel").getObject();
 
 			//get confirm card wizard step
 			var oConfirmCardWizStep = this.getView().byId("wizstepConfirmCard");
@@ -433,14 +430,14 @@ sap.ui.define([
 			this.getModel("ViewModel").setProperty("/bCardValidationFailed", false);
 
 			//adopt selected card into UI
-			this.getModel("LoyaltyCardConfirmModel").setProperty("/LoyaltyCardID", sLoyaltyCardID);
+			this.getModel("LoyaltyCardConfirmModel").setProperty("/LoyaltyCardID", oLoyaltyCard.LoyaltyCardID);
 
 			//set value state of loyalty card ID input to none
 			this.getView().byId("inputLoyaltyCardID").setValueState(sap.ui.core.ValueState.None);
 
 			//create object path for confirmed loyalty card
 			var sLoyaltyCardPath = "/" + this.getModel("LoyaltyModel").createKey("LoyaltyCards", {
-				LoyaltyCardID: sLoyaltyCardID
+				LoyaltyCardID: oLoyaltyCard.LoyaltyCardID
 			});
 
 			//set binding context to confirmed loyalty card
@@ -449,8 +446,10 @@ sap.ui.define([
 				//set new binding context
 				this.getView().setBindingContext(oLoyaltyCardContext, "LoyaltyModel");
 
+				//get access to loyalty card object
+				oLoyaltyCard = oLoyaltyCardContext.getObject();
+
 				//prepare view for appropriate card action
-				var oLoyaltyCard = oLoyaltyCardContext.getObject();
 				switch (oLoyaltyCard.CardStatus) {
 
 					//card is currently 'Active'
@@ -466,18 +465,18 @@ sap.ui.define([
 				}
 
 				//construct array of means of communication to deliver OTP
-				if (oLoyaltyCardConfirm.MobilePhoneNumber) {
+				if (oLoyaltyCard.MobilePhoneNumber) {
 					aMeansOfCommunication.push({
 						"MoCID": "0",
-						"MoCValue": oLoyaltyCardConfirm.MobilePhoneNumber
+						"MoCValue": oLoyaltyCard.MobilePhoneNumber
 					});
 				}
 
 				//eMail address is available for OTP delivery
-				if (oLoyaltyCardConfirm.EMailAddress) {
+				if (oLoyaltyCard.EMailAddress) {
 					aMeansOfCommunication.push({
 						"MoCID": "1",
-						"MoCValue": oLoyaltyCardConfirm.EMailAddress
+						"MoCValue": oLoyaltyCard.EMailAddress
 					});
 				}
 
@@ -847,7 +846,7 @@ sap.ui.define([
 			var oLoyaltyCard = oEvent.getSource().getBindingContext("LoyaltyCardConfirmModel").getObject();
 
 			//set confirmed loyalty card ID to UI
-			this.setConfirmedLoyaltyCardID(oLoyaltyCard.LoyaltyCardID);
+			this.setConfirmedLoyaltyCard(oLoyaltyCard);
 
 		},
 
@@ -877,6 +876,14 @@ sap.ui.define([
 			//move wizard to next step
 			this.oBlockReplaceWizard.nextStep();
 
+		},
+		
+		//on press of reset block and replace wizard
+		onPressResetBlockAndReplaceWizard: function(){
+
+			//reset and restart wizard for block and replace
+			this.getRouter().getTarget("BlockReplace").display();
+			
 		}
 
 	});

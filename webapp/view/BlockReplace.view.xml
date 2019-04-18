@@ -40,5 +40,9 @@
 				</WizardStep>
 			</Wizard>
 		</semantic:content>
+		<semantic:customFooterContent>
+			<ToolbarSpacer/>
+			<Button text="Reset" id="btnResetWizard" press="onPressResetBlockAndReplaceWizard" type="Transparent" class="sapUiSmallMarginEnd"/>
+		</semantic:customFooterContent>
 	</semantic:FullscreenPage>
 </mvc:View>

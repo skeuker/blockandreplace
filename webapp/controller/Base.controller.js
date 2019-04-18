@@ -570,7 +570,7 @@ sap.ui.define([
 								code: oMissingInput.sFormID,
 								description: "Validation failed: Required input is missing",
 								type: sap.ui.core.MessageType.Error,
-								processor: this._oMessageProcessor
+								processor: this.oMessageProcessor
 							})
 						);
 					}
@@ -599,7 +599,7 @@ sap.ui.define([
 								code: oInvalidInput.sFormID,
 								description: sMessageDetails,
 								type: sap.ui.core.MessageType.Error,
-								processor: this._oMessageProcessor
+								processor: this.oMessageProcessor
 							})
 						);
 					}
