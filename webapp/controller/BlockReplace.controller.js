@@ -324,7 +324,7 @@ sap.ui.define([
 			this.oMessageManager.removeAllMessages();
 
 			//set view to busy
-			this.getModel("ViewModel").setProperty("/busy", true);
+			this.getModel("ViewModel").setProperty("/isViewBusy", true);
 
 			//get confirm card wizard step
 			var oConfirmCardWizStep = this.getView().byId("wizstepConfirmCard");
@@ -366,7 +366,7 @@ sap.ui.define([
 						this.getModel("ViewModel").setProperty("/bCardConfirmed", true);
 
 						//view is no longer busy
-						this.getModel("ViewModel").setProperty("/busy", false);
+						this.getModel("ViewModel").setProperty("/isViewBusy", false);
 
 						// delay because addDependent will do a async rerendering 
 						var oInputLoyaltyCardID = this.getView().byId("inputLoyaltyCardID");
@@ -403,7 +403,7 @@ sap.ui.define([
 					this.getModel("ViewModel").setProperty("/bCardValidationFailed", true);
 
 					//set view to no longer busy
-					this.getModel("ViewModel").setProperty("/busy", false);
+					this.getModel("ViewModel").setProperty("/isViewBusy", false);
 
 				}.bind(this)
 
@@ -498,7 +498,7 @@ sap.ui.define([
 				this.oBlockReplaceWizard.nextStep();
 
 				//view is no longer busy
-				this.getModel("ViewModel").setProperty("/busy", false);
+				this.getModel("ViewModel").setProperty("/isViewBusy", false);
 
 			}.bind(this));
 
@@ -590,7 +590,7 @@ sap.ui.define([
 			this.oMessageManager.removeAllMessages();
 
 			//set view to busy
-			this.getModel("ViewModel").setProperty("/busy", true);
+			this.getModel("ViewModel").setProperty("/isViewBusy", true);
 
 			//get card action wizard step
 			var oCardActionWizStep = this.getView().byId("wizstepCardAction");
@@ -678,7 +678,7 @@ sap.ui.define([
 					this.sendStripMessage(this.getResourceBundle().getText("messageCardUpdateSuccessful"), sap.ui.core.MessageType.Success);
 
 					//set view to no longer busy
-					this.getModel("ViewModel").setProperty("/busy", false);
+					this.getModel("ViewModel").setProperty("/isViewBusy", false);
 
 				}.bind(this),
 
@@ -704,7 +704,7 @@ sap.ui.define([
 			this.oMessageManager.removeAllMessages();
 
 			//set view to busy
-			this.getModel("ViewModel").setProperty("/busy", true);
+			this.getModel("ViewModel").setProperty("/isViewBusy", true);
 
 			//get loyalty card to be replaced
 			var oLoyaltyCard = this.getView().getBindingContext("LoyaltyModel").getObject();
@@ -765,7 +765,7 @@ sap.ui.define([
 					this.sendStripMessage(this.getResourceBundle().getText("messageCardUpdateSuccessful"), sap.ui.core.MessageType.Success);
 
 					//set view to no longer busy
-					this.getModel("ViewModel").setProperty("/busy", false);
+					this.getModel("ViewModel").setProperty("/isViewBusy", false);
 
 				}.bind(this),
 
@@ -858,6 +858,9 @@ sap.ui.define([
 
 			//get access to the One Time Pin
 			this.oOneTimePinComponent = oEvent.getParameter("component");
+			
+			//attach to OneTimePinValidated event
+			this.oOneTimePinComponent.attachIsBusy(this.onOneTimePinIsBusy, this);
 
 			//attach to OneTimePinValidated event
 			this.oOneTimePinComponent.attachOneTimePinValidated(this.onOneTimePinValidated, this);
@@ -865,6 +868,17 @@ sap.ui.define([
 			//provide message strip instance to One Time Pin component
 			this.oOneTimePinComponent.setOuterMessageStrip(this.byId("msMessageStrip"));
 
+		},
+		
+		//on One Time Pin component busy state change
+		onOneTimePinIsBusy  : function(oEvent) {
+			
+			//get state of busy
+			var bBusyState = oEvent.getParameter("busyState");
+			
+			//set view to busy depending on state
+			this.getModel("ViewModel").setProperty("/isViewBusy", bBusyState);			
+			
 		},
 
 		//on One Time Pin validated

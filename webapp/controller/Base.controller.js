@@ -152,7 +152,7 @@ sap.ui.define([
 		renderODataErrorResponseToDetailMessagePage: function (oError) {
 
 			//set view to no longer busy
-			this.oViewModel.setProperty("/busy", false);
+			this.oViewModel.setProperty("/isViewBusy", false);
 
 			// set the layout property of flexible column layout control to show two columns
 			this.getModel("appView").setProperty("/layout", "TwoColumnsMidExpanded");
@@ -187,7 +187,7 @@ sap.ui.define([
 			}]);
 
 			//set view to no longer busy
-			this.oViewModel.setProperty("/busy", false);
+			this.oViewModel.setProperty("/isViewBusy", false);
 
 		},
 
@@ -204,7 +204,7 @@ sap.ui.define([
 			}]);
 
 			//set view to no longer busy
-			this.oViewModel.setProperty("/busy", false);
+			this.oViewModel.setProperty("/isViewBusy", false);
 
 		},
 
@@ -272,7 +272,7 @@ sap.ui.define([
 				this.setEntityMessages(aMessages);
 
 				//set view to no busy
-				this.oViewModel.setProperty("/busy", false);
+				this.oViewModel.setProperty("/isViewBusy", false);
 
 				//feedback to caller: errors occured
 				return true;
