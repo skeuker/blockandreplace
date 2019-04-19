@@ -901,6 +901,34 @@ sap.ui.define([
 			//reset and restart wizard for block and replace
 			this.getRouter().getTarget("BlockReplace").display();
 			
+		},
+		
+		//on successfully scanning a loyalty card to confirm
+		onConfirmCardScanSuccessful: function (oEvent) {
+			
+			//get scanned loyalty card barcode
+			var sScannedCardBarCode = oEvent.getParameter("text");
+
+			//adopt scanned loyalty card for confirmation
+			this.getModel("LoyaltyCardConfirmModel").setProperty("/LoyaltyCardID", sScannedCardBarCode);
+
+			//invoke live change handler
+			this.onCardConfirmLiveChange();
+
+		},
+		
+		//on successfully scanning a replacement loyalty card 
+		onReplaceCardScanSuccessful: function (oEvent) {
+			
+			//get scanned loyalty card barcode
+			var sScannedCardBarCode = oEvent.getParameter("text");
+
+			//adopt scanned loyalty card for replace
+			this.getView().byId("inputReplacementCardID").setValue(sScannedCardBarCode);
+
+			//invoke live change handler
+			this.onReplaceCardLiveChange();
+
 		}
 
 	});

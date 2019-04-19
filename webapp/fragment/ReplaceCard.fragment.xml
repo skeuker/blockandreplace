@@ -1,5 +1,5 @@
 <core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:sap.ui.layout.form="sap.ui.layout.form" xmlns:sap.ui.layout="sap.ui.layout"
-	xmlns="sap.m">
+	xmlns="sap.m" xmlns:ndc="sap.ndc">
 	<MessageStrip class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom" type="Information" text="{i18n>messageRequiredInput}"
 		showIcon="true"/>
 	<sap.ui.layout.form:Form id="formReplaceCard" class="sapUiMediumMarginBottom" editable="true">
@@ -14,8 +14,11 @@
 							<Label id="labelReplacementCardID" required="true" text="{i18n>labelReplacementCardID}"/>
 						</sap.ui.layout.form:label>
 						<sap.ui.layout.form:fields>
-							<Input id="inputReplacementCardID" placeholder="{i18n>inputPlaceHolderCardID}" width="200px" fieldWidth="80%" maxLength="16"
-								liveChange="onReplaceCardLiveChange" type="Number" enabled="{ViewModel>/inputReplacementCardIDEnabled}" description="for"/>
+							<HBox>
+								<Input id="inputReplacementCardID" placeholder="{i18n>inputPlaceHolderCardID}" width="200px" fieldWidth="80%" maxLength="16"
+									liveChange="onReplaceCardLiveChange" type="Number" enabled="{ViewModel>/inputReplacementCardIDEnabled}" description="for"/>
+								<ndc:BarcodeScannerButton id="bscanReplaceCard" scanSuccess="onReplaceCardScanSuccessful" enabled="{ViewModel>/inputReplacementCardIDEnabled}"/>
+							</HBox>
 						</sap.ui.layout.form:fields>
 					</sap.ui.layout.form:FormElement>
 					<sap.ui.layout.form:FormElement>

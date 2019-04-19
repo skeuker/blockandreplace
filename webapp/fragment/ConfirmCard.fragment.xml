@@ -1,5 +1,5 @@
 <core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:sap.ui.layout="sap.ui.layout" xmlns:sap.ui.layout.form="sap.ui.layout.form"
-	xmlns="sap.m">
+	xmlns="sap.m" xmlns:ndc="sap.ndc">
 	<MessageStrip class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom" type="Information" text="{i18n>messageRequiredInput}"
 		showIcon="true"/>
 	<sap.ui.layout.form:Form id="formConfirmCardAttributes" class="sapUiMediumMarginBottom" editable="true">
@@ -14,8 +14,11 @@
 							<Label id="labelLoyaltyCardID" required="false" text="{i18n>labelLoyaltyCardID}"/>
 						</sap.ui.layout.form:label>
 						<sap.ui.layout.form:fields>
-							<Input id="inputLoyaltyCardID" placeholder="{i18n>inputPlaceHolderCardID}" value="{LoyaltyCardConfirmModel>/LoyaltyCardID}" width="160px"
-								maxLength="16" liveChange="onCardConfirmLiveChange" type="Number"/>
+							<HBox>
+								<Input id="inputLoyaltyCardID" placeholder="{i18n>inputPlaceHolderCardID}" value="{LoyaltyCardConfirmModel>/LoyaltyCardID}" width="160px"
+									maxLength="16" liveChange="onCardConfirmLiveChange" type="Number"/>
+								<ndc:BarcodeScannerButton id="bscanConfirmCard" scanSuccess="onConfirmCardScanSuccessful"/>
+							</HBox>
 						</sap.ui.layout.form:fields>
 					</sap.ui.layout.form:FormElement>
 					<sap.ui.layout.form:FormElement>
@@ -32,8 +35,8 @@
 							<Label id="labelSurnameInput" required="true" text="{i18n>labelSurnameInput}"/>
 						</sap.ui.layout.form:label>
 						<sap.ui.layout.form:fields>
-							<Input id="inputSurname" placeholder="{i18n>inputPlaceHolderSurname}" value="{LoyaltyCardConfirmModel>/Surname}" width="290px" maxLength="40"
-								liveChange="onCardConfirmLiveChange"/>
+							<Input id="inputSurname" placeholder="{i18n>inputPlaceHolderSurname}" value="{LoyaltyCardConfirmModel>/Surname}" width="290px"
+								maxLength="40" liveChange="onCardConfirmLiveChange"/>
 						</sap.ui.layout.form:fields>
 					</sap.ui.layout.form:FormElement>
 					<sap.ui.layout.form:FormElement>
@@ -76,7 +79,8 @@
 								liveChange="onCardConfirmLiveChange" enabled="true"/>
 						</sap.ui.layout.form:fields>
 					</sap.ui.layout.form:FormElement>
-					<sap.ui.layout.form:FormElement visible="{= ${ViewModel>/bCardValidationFailed} || ${LoyaltyCardConfirmModel>/IDType} === 'Z00003' ? true : false }">
+					<sap.ui.layout.form:FormElement
+						visible="{= ${ViewModel>/bCardValidationFailed} || ${LoyaltyCardConfirmModel>/IDType} === 'Z00003' ? true : false }">
 						<sap.ui.layout.form:fields>
 							<Button text="{i18n>textButtonConfirmCard}" press="confirmCard" width="140px" type="Transparent"
 								class="sapUiSmallMarginTop sapUiSmallMarginBegin"/>
