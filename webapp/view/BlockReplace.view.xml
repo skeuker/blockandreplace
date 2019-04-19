@@ -1,7 +1,7 @@
 <mvc:View xmlns:core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
 	xmlns:semantic="sap.m.semantic" controllerName="pnp.blockandreplace.controller.BlockReplace" busy="{ViewModel>/isViewBusy}"
 	busyIndicatorDelay="{ViewModel>/busyDelay}">
-	<semantic:FullscreenPage title="{ViewModel>/viewTitle}" showNavButton="true" navButtonPress="onPressNavButton" showSubHeader="false">
+	<semantic:FullscreenPage title="{i18n>viewBlockReplaceTitle}" showNavButton="false" navButtonPress="onPressNavButton" showSubHeader="false">
 		<semantic:messagesIndicator>
 			<semantic:MessagesIndicator press="onMessagesButtonPress"/>
 		</semantic:messagesIndicator>
@@ -21,7 +21,7 @@
 						<core:Fragment fragmentName="pnp.blockandreplace.fragment.VerifyOneTimePin" type="XML"/>
 					</content>
 				</WizardStep>
-				<WizardStep id="wizstepCardAction" icon="sap-icon://two-keys" title="{i18n>titleBlockOrUnblockWizardStep}" validated="false"
+				<WizardStep id="wizstepCardAction" icon="sap-icon://repost" title="{i18n>titleBlockOrUnblockWizardStep}" validated="false"
 					subsequentSteps="wizstepReplaceCard, wizstepFinishUp" complete="completeWizstepCardAction">
 					<content>
 						<core:Fragment fragmentName="pnp.blockandreplace.fragment.CardAction" type="XML"/>

@@ -11,11 +11,11 @@ sap.ui.define([
 
 			//instantiate view model and set to view
 			this.oViewModel = new JSONModel({
-				viewTitle: this.getResourceBundle().getText("viewBlockReplaceTitle"),
 				bCardValidationFailed: false,
 				btnReplaceCardEnabled: false,
 				cboxNextActionVisible: false,
 				cboxNextActionEnabled: false,
+				isOldUI5Version: false,
 				bCardConfirmed: false,
 				busyDelay: 0,
 				busy: false
@@ -45,6 +45,18 @@ sap.ui.define([
 			//keep track of OData model
 			this.oLoyaltyModel = this.getOwnerComponent().getModel("LoyaltyModel");
 			this.setModel(this.oLoyaltyModel, "LoyaltyModel");
+
+			//indicate whether we're running on old UI5 version
+			var oUI5VersionInfo = sap.ui.getVersionInfo();
+			if (/^1.[01234]/.test(oUI5VersionInfo.version)) {
+
+				//keep track that app is running on old UI5 version
+				this.getModel("ViewModel").setProperty("/isOldUI5Version", true);
+
+				//load one time pin component the old way
+				this.loadOneTimePinComponentForOldUI5Version();
+
+			}
 
 		},
 
@@ -82,6 +94,8 @@ sap.ui.define([
 			this.getModel("ViewModel").setProperty("/bCardValidationFailed", false);
 			this.getModel("ViewModel").setProperty("/cboxNextActionVisible", false);
 			this.getModel("ViewModel").setProperty("/btnReplaceCardEnabled", false);
+			this.getModel("ViewModel").setProperty("/btnScanConfirmCardVisible", true);
+			this.getModel("ViewModel").setProperty("/btnScanReplaceCardVisible", true);
 			this.getModel("ViewModel").setProperty("/inputReplacementCardIDEnabled", true);
 
 			//set loyalty card query model to view
@@ -138,8 +152,8 @@ sap.ui.define([
 
 			//confirm card against backend when all input correct, not previously failed to validate and ID type not passport
 			if (!this.hasIncorrectInput([this.getView().byId("formConfirmCardAttributes")], oEvent.getSource()) &&
-				this.getView().byId("cboxIdentificationType").getSelectedKey() !== "Z00003" && 
-				!this.getModel("ViewModel").getProperty("/bCardValidationFailed")){
+				this.getView().byId("cboxIdentificationType").getSelectedKey() !== "Z00003" &&
+				!this.getModel("ViewModel").getProperty("/bCardValidationFailed")) {
 				this.confirmCard();
 			}
 
@@ -482,16 +496,16 @@ sap.ui.define([
 
 				//provide input to One Time Pin component
 				if (this.oOneTimePinComponent) {
-					
+
 					//initialize One Time Pin delivery
 					this.oOneTimePinComponent.initializeForOTPDelivery();
-					
+
 					//set means of communication how to deliver OTP
 					this.oOneTimePinComponent.setMeansOfCommunication(aMeansOfCommunication);
-					
+
 					//set One Time Purpose
 					this.oOneTimePinComponent.setOTPPurpose("Block & Replace");
-					
+
 				}
 
 				//go to verify One Time Pin wizard step
@@ -509,6 +523,12 @@ sap.ui.define([
 
 			//set card confirmation form to no longer editable
 			this.setFormInputControlsEnabled([this.getView().byId("formConfirmCardAttributes")], false);
+
+			//set card confirmation action controls to no longer enabled
+			this.setFormActionControlsEnabled([this.getView().byId("formConfirmCardAttributes")], false);
+
+			//set barcode scanner button to no longer visible
+			this.getModel("ViewModel").setProperty("/btnScanConfirmCardVisible", false);
 
 		},
 
@@ -528,6 +548,15 @@ sap.ui.define([
 
 			//hide message strip as it might have be visible after card action
 			this.oMessageStrip.setVisible(false);
+
+			//set card replace form to no longer editable
+			this.setFormInputControlsEnabled([this.getView().byId("formReplaceCard")], false);
+
+			//set card replace action controls to no longer enabled
+			this.setFormActionControlsEnabled([this.getView().byId("formReplaceCard")], false);
+
+			//set barcode scanner button for replace card to no longer visible
+			this.getModel("ViewModel").setProperty("/btnScanReplaceCardVisible", false);
 
 		},
 
@@ -858,7 +887,7 @@ sap.ui.define([
 
 			//get access to the One Time Pin
 			this.oOneTimePinComponent = oEvent.getParameter("component");
-			
+
 			//attach to OneTimePinValidated event
 			this.oOneTimePinComponent.attachIsBusy(this.onOneTimePinIsBusy, this);
 
@@ -869,16 +898,16 @@ sap.ui.define([
 			this.oOneTimePinComponent.setOuterMessageStrip(this.byId("msMessageStrip"));
 
 		},
-		
+
 		//on One Time Pin component busy state change
-		onOneTimePinIsBusy  : function(oEvent) {
-			
+		onOneTimePinIsBusy: function(oEvent) {
+
 			//get state of busy
 			var bBusyState = oEvent.getParameter("busyState");
-			
+
 			//set view to busy depending on state
-			this.getModel("ViewModel").setProperty("/isViewBusy", bBusyState);			
-			
+			this.getModel("ViewModel").setProperty("/isViewBusy", bBusyState);
+
 		},
 
 		//on One Time Pin validated
@@ -894,18 +923,18 @@ sap.ui.define([
 			this.oBlockReplaceWizard.nextStep();
 
 		},
-		
+
 		//on press of reset block and replace wizard
-		onPressResetBlockAndReplaceWizard: function(){
+		onPressResetBlockAndReplaceWizard: function() {
 
 			//reset and restart wizard for block and replace
 			this.getRouter().getTarget("BlockReplace").display();
-			
+
 		},
-		
+
 		//on successfully scanning a loyalty card to confirm
-		onConfirmCardScanSuccessful: function (oEvent) {
-			
+		onConfirmCardScanSuccessful: function(oEvent) {
+
 			//get scanned loyalty card barcode
 			var sScannedCardBarCode = oEvent.getParameter("text");
 
@@ -916,10 +945,10 @@ sap.ui.define([
 			this.onCardConfirmLiveChange();
 
 		},
-		
+
 		//on successfully scanning a replacement loyalty card 
-		onReplaceCardScanSuccessful: function (oEvent) {
-			
+		onReplaceCardScanSuccessful: function(oEvent) {
+
 			//get scanned loyalty card barcode
 			var sScannedCardBarCode = oEvent.getParameter("text");
 
@@ -928,6 +957,45 @@ sap.ui.define([
 
 			//invoke live change handler
 			this.onReplaceCardLiveChange();
+
+		},
+
+		//load One Time Pin component for old UI5 version
+		loadOneTimePinComponentForOldUI5Version: function() {
+
+			//load One Time Pin component
+			sap.ui.component({
+				name: "pnp.onetimepin",
+				async: true,
+				settings: {},
+				componentData: {},
+				manifestFirst: true
+
+				//after One Time Pin component is loaded
+			}).then(function(oComponent) {
+
+				//get access to the One Time Pin
+				this.oOneTimePinComponent = oComponent;
+
+				//attach to OneTimePinValidated event
+				this.oOneTimePinComponent.attachIsBusy(this.onOneTimePinIsBusy, this);
+
+				//attach to OneTimePinValidated event
+				this.oOneTimePinComponent.attachOneTimePinValidated(this.onOneTimePinValidated, this);
+
+				//provide message strip instance to One Time Pin component
+				this.oOneTimePinComponent.setOuterMessageStrip(this.byId("msMessageStrip"));
+
+				//set component to component container
+				this.byId("compcontOneTimePinForOldUI5Versions").setComponent(oComponent);
+
+			}.bind(this))
+
+			//exception handling
+			.catch(function(oError) {
+				jQuery.sap.log.error(oError);
+
+			});
 
 		}
 

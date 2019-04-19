@@ -366,8 +366,7 @@ sap.ui.define([
 				var sControlType = oControl.getMetadata().getName();
 
 				//for controls allowing to take action
-				if (sControlType === "sap.m.Button" || 
-				    sControlType === "sap.ndc.BarcodeScannerButton") {
+				if (sControlType === "sap.m.Button") {
 
 					//keep track of this control as input control
 					aActionControl.push(item);

@@ -17,7 +17,7 @@
 							<HBox>
 								<Input id="inputLoyaltyCardID" placeholder="{i18n>inputPlaceHolderCardID}" value="{LoyaltyCardConfirmModel>/LoyaltyCardID}" width="160px"
 									maxLength="16" liveChange="onCardConfirmLiveChange" type="Number"/>
-								<ndc:BarcodeScannerButton id="bscanConfirmCard" scanSuccess="onConfirmCardScanSuccessful"/>
+								<ndc:BarcodeScannerButton id="bscanConfirmCard" scanSuccess="onConfirmCardScanSuccessful" visible="{ViewModel>/btnScanConfirmCardVisible}"/>
 							</HBox>
 						</sap.ui.layout.form:fields>
 					</sap.ui.layout.form:FormElement>

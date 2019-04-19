@@ -63,6 +63,7 @@
 			}
 		},
 		"resourceRoots": {
+			"pnp.blockandreplace": "./",
 			"pnp.onetimepin": "../onetimepin/"
 		},
 		"componentUsages": {

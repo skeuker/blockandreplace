@@ -16,8 +16,9 @@
 						<sap.ui.layout.form:fields>
 							<HBox>
 								<Input id="inputReplacementCardID" placeholder="{i18n>inputPlaceHolderCardID}" width="200px" fieldWidth="80%" maxLength="16"
-									liveChange="onReplaceCardLiveChange" type="Number" enabled="{ViewModel>/inputReplacementCardIDEnabled}" description="for"/>
-								<ndc:BarcodeScannerButton id="bscanReplaceCard" scanSuccess="onReplaceCardScanSuccessful" enabled="{ViewModel>/inputReplacementCardIDEnabled}"/>
+									liveChange="onReplaceCardLiveChange" type="Number" enabled="{ViewModel>/inputReplacementCardIDEnabled}"/>
+								<ndc:BarcodeScannerButton id="bscanReplaceCard" scanSuccess="onReplaceCardScanSuccessful" visible="{ViewModel>/btnScanReplaceCardVisible}"/>
+								<Text text="for" class="sapUiTinyMarginBegin"/>
 							</HBox>
 						</sap.ui.layout.form:fields>
 					</sap.ui.layout.form:FormElement>

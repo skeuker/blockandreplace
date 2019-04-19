@@ -11,7 +11,7 @@
 					<sap.ui.layout.form:FormElement>
 						<sap.ui.layout.form:fields>
 							<HBox>
-								<GenericTile backgroundImage="images/smartshoppercard.jpg" frameType="TwoByOne" class="sapUiSmallMarginTop sapUiLargeMarginBegin"
+								<GenericTile backgroundImage="/sap/bc/ui5_ui5/pnp/blockreplace/images/smartshoppercard.jpg" frameType="TwoByOne" class="sapUiSmallMarginTop sapUiLargeMarginBegin"
 									headerImage="{= ${LoyaltyCardTrackerModel>CardStatus} === 'Active'? 'sap-icon://status-positive' : 'sap-icon://status-negative' }">
 									<tileContent>
 										<TileContent footer="{= 'Card number: ' + ${LoyaltyCardTrackerModel>LoyaltyCardID} }">
