@@ -15,7 +15,7 @@
 						</sap.ui.layout.form:label>
 						<sap.ui.layout.form:fields>
 							<HBox>
-								<Input id="inputReplacementCardID" placeholder="{i18n>inputPlaceHolderCardID}" width="200px" fieldWidth="80%" maxLength="16"
+								<Input id="inputReplacementCardID" placeholder="{i18n>inputPlaceHolderCardID}" width="160px" fieldWidth="80%" maxLength="16"
 									liveChange="onReplaceCardLiveChange" type="Number" enabled="{ViewModel>/inputReplacementCardIDEnabled}"/>
 								<ndc:BarcodeScannerButton id="bscanReplaceCard" scanSuccess="onReplaceCardScanSuccessful" visible="{ViewModel>/btnScanReplaceCardVisible}"/>
 								<Text text="for" class="sapUiTinyMarginBegin"/>
@@ -27,7 +27,7 @@
 							<Label text="{i18n>labelBlockedCardID}"/>
 						</sap.ui.layout.form:label>
 						<sap.ui.layout.form:fields>
-							<Input value="{LoyaltyCardConfirmModel>/LoyaltyCardID}" width="200px" fieldWidth="80%" enabled="false" description="of"/>
+							<Input value="{LoyaltyCardConfirmModel>/LoyaltyCardID}" width="240px" fieldWidth="80%" enabled="false" description="of"/>
 						</sap.ui.layout.form:fields>
 					</sap.ui.layout.form:FormElement>
 					<sap.ui.layout.form:FormElement>
@@ -35,7 +35,7 @@
 							<Label text="{i18n>labelFirstNameInput}"/>
 						</sap.ui.layout.form:label>
 						<sap.ui.layout.form:fields>
-							<Text text="{LoyaltyCardConfirmModel>/Name}"/>
+							<Input placeholder="{i18n>inputPlaceHolderName}" value="{LoyaltyCardConfirmModel>/Name}" width="250px" enabled="false"/>
 						</sap.ui.layout.form:fields>
 					</sap.ui.layout.form:FormElement>
 					<sap.ui.layout.form:FormElement>
@@ -43,7 +43,7 @@
 							<Label text="{i18n>labelSurnameInput}"/>
 						</sap.ui.layout.form:label>
 						<sap.ui.layout.form:fields>
-							<Text text="{LoyaltyCardConfirmModel>/Surname}" width="30%"/>
+							<Input placeholder="{i18n>inputPlaceHolderSurname}" value="{LoyaltyCardConfirmModel>/Surname}" width="250px" enabled="false"/>
 						</sap.ui.layout.form:fields>
 					</sap.ui.layout.form:FormElement>
 					<sap.ui.layout.form:FormElement>

@@ -26,7 +26,7 @@
 							<Label id="labelFirstNameInput" required="true" text="{i18n>labelFirstNameInput}"/>
 						</sap.ui.layout.form:label>
 						<sap.ui.layout.form:fields>
-							<Input id="inputFirstName" placeholder="{i18n>inputPlaceHolderName}" value="{LoyaltyCardConfirmModel>/Name}" width="290px" maxLength="40"
+							<Input id="inputFirstName" placeholder="{i18n>inputPlaceHolderName}" value="{LoyaltyCardConfirmModel>/Name}" width="250px" maxLength="40"
 								liveChange="onCardConfirmLiveChange"/>
 						</sap.ui.layout.form:fields>
 					</sap.ui.layout.form:FormElement>
@@ -35,7 +35,7 @@
 							<Label id="labelSurnameInput" required="true" text="{i18n>labelSurnameInput}"/>
 						</sap.ui.layout.form:label>
 						<sap.ui.layout.form:fields>
-							<Input id="inputSurname" placeholder="{i18n>inputPlaceHolderSurname}" value="{LoyaltyCardConfirmModel>/Surname}" width="290px"
+							<Input id="inputSurname" placeholder="{i18n>inputPlaceHolderSurname}" value="{LoyaltyCardConfirmModel>/Surname}" width="250px"
 								maxLength="40" liveChange="onCardConfirmLiveChange"/>
 						</sap.ui.layout.form:fields>
 					</sap.ui.layout.form:FormElement>
@@ -45,7 +45,7 @@
 						</sap.ui.layout.form:label>
 						<sap.ui.layout.form:fields>
 							<Input fieldWidth="50%" id="inputEMailAddress" liveChange="onCardConfirmLiveChange" placeholder="{i18n>inputPlaceholderEMailAddress}"
-								type="Email" value="{LoyaltyCardConfirmModel>/EMailAddress}" width="350px"/>
+								type="Email" value="{LoyaltyCardConfirmModel>/EMailAddress}" width="290px"/>
 						</sap.ui.layout.form:fields>
 					</sap.ui.layout.form:FormElement>
 					<sap.ui.layout.form:FormElement>
