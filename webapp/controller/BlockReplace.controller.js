@@ -956,7 +956,7 @@ sap.ui.define([
 			this.getView().byId("inputReplacementCardID").setValue(sScannedCardBarCode);
 
 			//invoke live change handler
-			this.onReplaceCardLiveChange();
+			this.onReplaceCardLiveChange(oEvent);
 
 		},
 
