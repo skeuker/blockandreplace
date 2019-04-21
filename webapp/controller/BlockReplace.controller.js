@@ -942,7 +942,7 @@ sap.ui.define([
 			this.getModel("LoyaltyCardConfirmModel").setProperty("/LoyaltyCardID", sScannedCardBarCode);
 
 			//invoke live change handler
-			this.onCardConfirmLiveChange();
+			this.onCardConfirmLiveChange(oEvent);
 
 		},
 
