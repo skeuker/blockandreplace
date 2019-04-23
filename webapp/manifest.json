@@ -64,7 +64,7 @@
 		},
 		"resourceRoots": {
 			"pnp.blockandreplace": "./",
-			"pnp.onetimepin": "../sap/bc/ui5_ui5/pnp/onetimepin/"
+			"pnp.onetimepin": "../onetimepin/"
 		},
 		"componentUsages": {
 			"OneTimePin": {

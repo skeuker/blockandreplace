@@ -3,7 +3,7 @@
 	<sap.ui.layout.form:Form id="formFinishUp" class="sapUiMediumMarginBottom" editable="false"
 		formContainers="{LoyaltyCardTrackerModel>/LoyaltyCards}">
 		<sap.ui.layout.form:layout>
-			<sap.ui.layout.form:ResponsiveGridLayout columnsM="1" columnsL="1" />
+			<sap.ui.layout.form:ResponsiveGridLayout singleContainerFullSize="true" columnsM="1" columnsL="1" />
 		</sap.ui.layout.form:layout>
 		<sap.ui.layout.form:formContainers>
 			<sap.ui.layout.form:FormContainer>
