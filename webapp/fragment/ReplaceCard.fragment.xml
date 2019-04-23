@@ -47,8 +47,13 @@
 						</sap.ui.layout.form:fields>
 					</sap.ui.layout.form:FormElement>
 					<sap.ui.layout.form:FormElement>
-						<Button text="{i18n>textButtonReplaceCard}" press="replaceCard" width="140px" type="Emphasized"
-							class="sapUiSmallMarginTop pnpReplaceCardUiLargeMarginBegin" enabled="{ViewModel>/btnReplaceCardEnabled}"/>
+						<sap.ui.layout.form:label>
+							<Label required="false" textAlign="Left"/>
+						</sap.ui.layout.form:label>
+						<sap.ui.layout.form:fields>
+							<Button text="{i18n>textButtonReplaceCard}" press="replaceCard" width="140px" type="Emphasized"
+								class="sapUiSmallMarginTop" enabled="{ViewModel>/btnReplaceCardEnabled}"/>
+						</sap.ui.layout.form:fields>
 					</sap.ui.layout.form:FormElement>
 				</sap.ui.layout.form:formElements>
 			</sap.ui.layout.form:FormContainer>
