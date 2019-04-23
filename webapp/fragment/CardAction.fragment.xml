@@ -2,7 +2,7 @@
 	xmlns="sap.m">
 	<sap.ui.layout.form:Form id="formCardAction" class="sapUiMediumMarginBottom" editable="true">
 		<sap.ui.layout.form:layout>
-			<sap.ui.layout.form:ResponsiveGridLayout adjustLabelSpan="true"/>
+			<sap.ui.layout.form:ResponsiveGridLayout/>
 		</sap.ui.layout.form:layout>
 		<sap.ui.layout.form:formContainers>
 			<sap.ui.layout.form:FormContainer>

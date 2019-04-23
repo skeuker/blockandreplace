@@ -4,7 +4,7 @@
 		showIcon="true"/>
 	<sap.ui.layout.form:Form id="formConfirmCardAttributes" class="sapUiMediumMarginBottom" editable="true">
 		<sap.ui.layout.form:layout>
-			<sap.ui.layout.form:ResponsiveGridLayout adjustLabelSpan="true"/>
+			<sap.ui.layout.form:ResponsiveGridLayout singleContainerFullSize="true"/>
 		</sap.ui.layout.form:layout>
 		<sap.ui.layout.form:formContainers>
 			<sap.ui.layout.form:FormContainer>
@@ -45,7 +45,7 @@
 						</sap.ui.layout.form:label>
 						<sap.ui.layout.form:fields>
 							<Input fieldWidth="50%" id="inputEMailAddress" liveChange="onCardConfirmLiveChange" placeholder="{i18n>inputPlaceholderEMailAddress}"
-								type="Email" value="{LoyaltyCardConfirmModel>/EMailAddress}" width="290px"/>
+								value="{LoyaltyCardConfirmModel>/EMailAddress}" width="290px" type="Email"/>
 						</sap.ui.layout.form:fields>
 					</sap.ui.layout.form:FormElement>
 					<sap.ui.layout.form:FormElement>
@@ -54,12 +54,12 @@
 						</sap.ui.layout.form:label>
 						<sap.ui.layout.form:fields>
 							<Input fieldWidth="50%" id="inputMobileNumber" liveChange="onCardConfirmLiveChange" placeholder="{i18n>inputPlaceHolderMobilePhoneNumber}"
-								value="{LoyaltyCardConfirmModel>/MobilePhoneNumber}" width="250px"/>
+								value="{LoyaltyCardConfirmModel>/MobilePhoneNumber}" width="250px" type="Tel"/>
 						</sap.ui.layout.form:fields>
 					</sap.ui.layout.form:FormElement>
 					<sap.ui.layout.form:FormElement>
 						<sap.ui.layout.form:label>
-							<Label required="true" text="{i18n>labelIdentificationType}"/>
+							<Label required="true" text="{i18n>labelIdentificationType}" width="100%" wrapping="true"/>
 						</sap.ui.layout.form:label>
 						<sap.ui.layout.form:fields>
 							<ComboBox id="cboxIdentificationType" items="{OptionsModel>/IDTypes}" selectedKey="{LoyaltyCardConfirmModel>/IDType}" width="250px"
@@ -72,11 +72,11 @@
 					</sap.ui.layout.form:FormElement>
 					<sap.ui.layout.form:FormElement>
 						<sap.ui.layout.form:label>
-							<Label required="true" text="{i18n>labelIDNumber}"/>
+							<Label required="true" text="{i18n>labelIDNumber}" width="100%" wrapping="true"/>
 						</sap.ui.layout.form:label>
 						<sap.ui.layout.form:fields>
 							<Input id="inputIDNumber" placeholder="{i18n>inputPlaceHolderIDNumber}" value="{LoyaltyCardConfirmModel>/IDNumber}" width="200px"
-								liveChange="onCardConfirmLiveChange" enabled="true"/>
+								liveChange="onCardConfirmLiveChange" enabled="true" type="{= ${LoyaltyCardConfirmModel>/IDType} === 'Z00002' ? 'Number' : 'Text' }"/>
 						</sap.ui.layout.form:fields>
 					</sap.ui.layout.form:FormElement>
 					<sap.ui.layout.form:FormElement

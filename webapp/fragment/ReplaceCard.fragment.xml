@@ -4,14 +4,14 @@
 		showIcon="true"/>
 	<sap.ui.layout.form:Form id="formReplaceCard" class="sapUiMediumMarginBottom" editable="true">
 		<sap.ui.layout.form:layout>
-			<sap.ui.layout.form:ResponsiveGridLayout adjustLabelSpan="true"/>
+			<sap.ui.layout.form:ResponsiveGridLayout singleContainerFullSize="true"/>
 		</sap.ui.layout.form:layout>
 		<sap.ui.layout.form:formContainers>
 			<sap.ui.layout.form:FormContainer>
 				<sap.ui.layout.form:formElements>
 					<sap.ui.layout.form:FormElement>
 						<sap.ui.layout.form:label>
-							<Label id="labelReplacementCardID" required="true" text="{i18n>labelReplacementCardID}"/>
+							<Label id="labelReplacementCardID" required="true" text="{i18n>labelReplacementCardID}" width="100%" wrapping="true"/>
 						</sap.ui.layout.form:label>
 						<sap.ui.layout.form:fields>
 							<HBox>

@@ -546,9 +546,6 @@ sap.ui.define([
 		//on completion of replace card wizard step
 		completeWizstepReplaceCard: function(oEvent) {
 
-			//hide message strip as it might have be visible after card action
-			this.oMessageStrip.setVisible(false);
-
 			//set card replace form to no longer editable
 			this.setFormInputControlsEnabled([this.getView().byId("formReplaceCard")], false);
 
@@ -795,6 +792,9 @@ sap.ui.define([
 
 					//set view to no longer busy
 					this.getModel("ViewModel").setProperty("/isViewBusy", false);
+
+					//go to Finish Up wizard step
+					this.oBlockReplaceWizard.nextStep();
 
 				}.bind(this),
 
