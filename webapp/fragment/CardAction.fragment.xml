@@ -9,7 +9,7 @@
 				<sap.ui.layout.form:formElements>
 					<sap.ui.layout.form:FormElement>
 						<sap.ui.layout.form:fields>
-							<GenericTile backgroundImage="/sap/bc/ui5_ui5/pnp/blockreplace/images/smartshoppercard.jpg" frameType="TwoByOne" class="sapUiSmallMarginTop sapUiLargeMarginBegin"
+							<GenericTile backgroundImage="/sap/bc/ui5_ui5/pnp/blockreplace/images/smartshoppercard.jpg" frameType="TwoByOne" class="sapUiSmallMarginTop"
 								headerImage="{= ${LoyaltyModel>CardStatus} === 'Active'? 'sap-icon://status-positive' : 'sap-icon://status-negative' }">
 								<tileContent>
 									<TileContent footer="{= 'Card number: ' + ${LoyaltyModel>LoyaltyCardID} }">
@@ -24,14 +24,14 @@
 					<sap.ui.layout.form:FormElement visible="{= ${ViewModel>/cboxNextActionVisible} === true? false : true }">
 						<HBox>
 							<Button text="{ViewModel>/toggleCardStatusButtonText}" press="toggleCardStatus" width="140px" type="Emphasized"
-								class="sapUiMediumMarginTop sapUiLargeMarginBegin"/>
+								class="sapUiMediumMarginTop"/>
 							<Button text="{i18n>textButtonContinueWithoutStatusChange}" press="continueWithoutCardStatusChange" width="140px" type="Transparent"
 								class="sapUiMediumMarginTop sapUiLargeMarginBegin" visible="{= ${LoyaltyModel>CardStatus} === 'Blocked'? true : false }"/>
 						</HBox>
 					</sap.ui.layout.form:FormElement>
 					<sap.ui.layout.form:FormElement visible="{ViewModel>/cboxNextActionVisible}">
 						<ActionSelect id="cboxNextAction" items="{OptionsModel>/NextActions}" width="200px" change="onNextActionChange"
-							visible="{ViewModel>/cboxNextActionEnabled}" class="sapUiMediumMarginTop sapUiLargeMarginBegin">
+							visible="{ViewModel>/cboxNextActionEnabled}" class="sapUiMediumMarginTop">
 							<items>
 								<core:ListItem key="{OptionsModel>NextActionID}" text="{OptionsModel>NextActionText}"/>
 							</items>

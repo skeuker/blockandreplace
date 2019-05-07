@@ -482,7 +482,8 @@ sap.ui.define([
 				if (oLoyaltyCard.MobilePhoneNumber) {
 					aMeansOfCommunication.push({
 						"MoCID": "0",
-						"MoCValue": "SMS to " + oLoyaltyCard.MobilePhoneNumber
+						"MoCValue": oLoyaltyCard.MobilePhoneNumber,
+						"MoCValueText": "SMS to " + oLoyaltyCard.MobilePhoneNumber
 					});
 				}
 
@@ -490,7 +491,8 @@ sap.ui.define([
 				if (oLoyaltyCard.EMailAddress) {
 					aMeansOfCommunication.push({
 						"MoCID": "1",
-						"MoCValue": "eMail to " + oLoyaltyCard.EMailAddress
+						"MoCValue": oLoyaltyCard.EMailAddress,
+						"MoCValueText": "eMail to " + oLoyaltyCard.EMailAddress
 					});
 				}
 

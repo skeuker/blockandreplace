@@ -81,9 +81,12 @@
 					</sap.ui.layout.form:FormElement>
 					<sap.ui.layout.form:FormElement
 						visible="{= ${ViewModel>/bCardValidationFailed} || ${LoyaltyCardConfirmModel>/IDType} === 'Z00003' ? true : false }">
+						<sap.ui.layout.form:label>
+							<Label required="false" textAlign="Left"/>
+						</sap.ui.layout.form:label>
 						<sap.ui.layout.form:fields>
-							<Button text="{i18n>textButtonConfirmCard}" press="confirmCard" width="140px" type="Transparent"
-								class="sapUiSmallMarginTop sapUiSmallMarginBegin"/>
+							<Button text="{i18n>textButtonConfirmCard}" press="confirmCard" width="140px" type="Emphasized"
+								class="sapUiSmallMarginTop"/>
 						</sap.ui.layout.form:fields>
 					</sap.ui.layout.form:FormElement>
 				</sap.ui.layout.form:formElements>
