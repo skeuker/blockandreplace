@@ -1,12 +1,13 @@
 <mvc:View xmlns:core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
 	xmlns:semantic="sap.m.semantic" controllerName="pnp.blockandreplace.controller.BlockReplace" busy="{ViewModel>/isViewBusy}"
 	busyIndicatorDelay="{ViewModel>/busyDelay}">
-	<semantic:FullscreenPage title="{i18n>viewBlockReplaceTitle}" showNavButton="false" navButtonPress="onPressNavButton" showSubHeader="false">
+	<semantic:FullscreenPage title="{i18n>viewBlockReplaceTitle}" showNavButton="false" navButtonPress="onPressNavButton" showSubHeader="false"
+		enableScrolling="false">
 		<semantic:messagesIndicator>
 			<semantic:MessagesIndicator press="onMessagesButtonPress"/>
 		</semantic:messagesIndicator>
 		<semantic:content>
-			<MessageStrip id="msMessageStrip" showCloseButton="true" showIcon="true" text=""/>
+			<MessageStrip id="msMessageStrip" showCloseButton="false" showIcon="true"/>
 			<Wizard complete="onPressBlockReplaceWizardFinishButton" finishButtonText="{i18n>textBlockReplaceFinishButton}" id="wizBlockReplace"
 				showNextButton="true" enableBranching="true">
 				<WizardStep id="wizstepConfirmCard" icon="sap-icon://customer" title="{i18n>titleConfirmCardWizardStep}" validated="false"
