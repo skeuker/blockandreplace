@@ -13,7 +13,7 @@
 							<VBox>
 								<GenericTile backgroundImage="/sap/bc/ui5_ui5/pnp/blockreplace/images/smartshoppercard.jpg" frameType="TwoByOne"
 									class="sapUiTinyMarginTop"
-									headerImage="{= ${LoyaltyCardTrackerModel>CardStatus} === 'Active'? 'sap-icon://status-positive' : 'sap-icon://status-negative' }">
+									headerImage="{= ${LoyaltyCardTrackerModel>CardStatus} === 'Active'? 'sap-icon://status-positive' : 'sap-icon://cancel' }">
 									<tileContent>
 										<TileContent footer="{= 'Card number: ' + ${LoyaltyCardTrackerModel>LoyaltyCardID} }">
 											<content>

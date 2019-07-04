@@ -81,10 +81,6 @@ sap.ui.define([
 			//create object with loyalty card query attributes
 			var oLoyaltyCardQuery = {
 				LoyaltyCardID: "",
-				Name: "",
-				Surname: "",
-				EMailAddress: "",
-				MobilePhoneNumber: "",
 				IDNumber: "",
 				IDType: ""
 			};
@@ -353,11 +349,7 @@ sap.ui.define([
 				urlParameters: {
 					"LoyaltyCardID": oLoyaltyCardConfirm.LoyaltyCardID,
 					"IDNumber": this.getView().byId("inputIDNumber").getValue(),
-					"IDType": oLoyaltyCardConfirm.IDType,
-					"MobilePhoneNumber": oLoyaltyCardConfirm.MobilePhoneNumber,
-					"EMailAddress": oLoyaltyCardConfirm.EMailAddress,
-					"Name": oLoyaltyCardConfirm.Name,
-					"Surname": oLoyaltyCardConfirm.Surname
+					"IDType": oLoyaltyCardConfirm.IDType
 				},
 
 				//on receipt of card confirmation results
@@ -446,6 +438,10 @@ sap.ui.define([
 			//adopt selected card into UI
 			this.getModel("LoyaltyCardConfirmModel").setProperty("/LoyaltyCardID", oLoyaltyCard.LoyaltyCardID);
 
+			//keep track of loyalty member personal details
+			this.getModel("LoyaltyCardConfirmModel").setProperty("/MemberName", oLoyaltyCard.MemberName);
+			this.getModel("LoyaltyCardConfirmModel").setProperty("/MemberSurname", oLoyaltyCard.MemberSurname);
+
 			//set value state of loyalty card ID input to none
 			this.getView().byId("inputLoyaltyCardID").setValueState(sap.ui.core.ValueState.None);
 
@@ -496,6 +492,23 @@ sap.ui.define([
 					});
 				}
 
+				//no further processing here if no means of communication available
+				if (aMeansOfCommunication.length === 0) {
+
+					//invalidate card confirm wizard step
+					this.oBlockReplaceWizard.invalidateStep(oConfirmCardWizStep);
+
+					//message handling: missing means of communication
+					this.sendStripMessage(this.getResourceBundle().getText("messageMissingMoCForOTPDelivery"), sap.ui.core.MessageType.Warning);
+
+					//view is no longer busy
+					this.getModel("ViewModel").setProperty("/isViewBusy", false);
+
+					//no further processing here
+					return;
+
+				}
+
 				//provide input to One Time Pin component
 				if (this.oOneTimePinComponent) {
 
@@ -510,11 +523,11 @@ sap.ui.define([
 
 				}
 
-				//go to verify One Time Pin wizard step
-				this.oBlockReplaceWizard.nextStep();
-
 				//view is no longer busy
 				this.getModel("ViewModel").setProperty("/isViewBusy", false);
+
+				//go to verify One Time Pin wizard step
+				this.oBlockReplaceWizard.nextStep();
 
 			}.bind(this));
 

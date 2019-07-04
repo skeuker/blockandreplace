@@ -35,7 +35,7 @@
 							<Label text="{i18n>labelFirstNameInput}"/>
 						</sap.ui.layout.form:label>
 						<sap.ui.layout.form:fields>
-							<Input placeholder="{i18n>inputPlaceHolderName}" value="{LoyaltyCardConfirmModel>/Name}" width="250px" enabled="false"/>
+							<Input value="{LoyaltyCardConfirmModel>/MemberName}" width="250px" enabled="false"/>
 						</sap.ui.layout.form:fields>
 					</sap.ui.layout.form:FormElement>
 					<sap.ui.layout.form:FormElement>
@@ -43,7 +43,7 @@
 							<Label text="{i18n>labelSurnameInput}"/>
 						</sap.ui.layout.form:label>
 						<sap.ui.layout.form:fields>
-							<Input placeholder="{i18n>inputPlaceHolderSurname}" value="{LoyaltyCardConfirmModel>/Surname}" width="250px" enabled="false"/>
+							<Input value="{LoyaltyCardConfirmModel>/MemberSurname}" width="250px" enabled="false"/>
 						</sap.ui.layout.form:fields>
 					</sap.ui.layout.form:FormElement>
 					<sap.ui.layout.form:FormElement>

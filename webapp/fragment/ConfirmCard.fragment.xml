@@ -23,42 +23,6 @@
 					</sap.ui.layout.form:FormElement>
 					<sap.ui.layout.form:FormElement>
 						<sap.ui.layout.form:label>
-							<Label id="labelFirstNameInput" required="true" text="{i18n>labelFirstNameInput}"/>
-						</sap.ui.layout.form:label>
-						<sap.ui.layout.form:fields>
-							<Input id="inputFirstName" placeholder="{i18n>inputPlaceHolderName}" value="{LoyaltyCardConfirmModel>/Name}" width="250px" maxLength="40"
-								liveChange="onCardConfirmLiveChange"/>
-						</sap.ui.layout.form:fields>
-					</sap.ui.layout.form:FormElement>
-					<sap.ui.layout.form:FormElement>
-						<sap.ui.layout.form:label>
-							<Label id="labelSurnameInput" required="true" text="{i18n>labelSurnameInput}"/>
-						</sap.ui.layout.form:label>
-						<sap.ui.layout.form:fields>
-							<Input id="inputSurname" placeholder="{i18n>inputPlaceHolderSurname}" value="{LoyaltyCardConfirmModel>/Surname}" width="250px"
-								maxLength="40" liveChange="onCardConfirmLiveChange"/>
-						</sap.ui.layout.form:fields>
-					</sap.ui.layout.form:FormElement>
-					<sap.ui.layout.form:FormElement>
-						<sap.ui.layout.form:label>
-							<Label required="false" text="{i18n>labelInputEMailAddress}" width="100%"/>
-						</sap.ui.layout.form:label>
-						<sap.ui.layout.form:fields>
-							<Input fieldWidth="50%" id="inputEMailAddress" liveChange="onCardConfirmLiveChange" placeholder="{i18n>inputPlaceholderEMailAddress}"
-								value="{LoyaltyCardConfirmModel>/EMailAddress}" width="290px" type="Email"/>
-						</sap.ui.layout.form:fields>
-					</sap.ui.layout.form:FormElement>
-					<sap.ui.layout.form:FormElement>
-						<sap.ui.layout.form:label>
-							<Label id="labelPersonMobileNumberInput" required="true" text="Mobile number"/>
-						</sap.ui.layout.form:label>
-						<sap.ui.layout.form:fields>
-							<Input fieldWidth="50%" id="inputMobileNumber" liveChange="onCardConfirmLiveChange" placeholder="{i18n>inputPlaceHolderMobilePhoneNumber}"
-								value="{LoyaltyCardConfirmModel>/MobilePhoneNumber}" width="250px" type="Tel"/>
-						</sap.ui.layout.form:fields>
-					</sap.ui.layout.form:FormElement>
-					<sap.ui.layout.form:FormElement>
-						<sap.ui.layout.form:label>
 							<Label required="true" text="{i18n>labelIdentificationType}" width="100%" wrapping="true"/>
 						</sap.ui.layout.form:label>
 						<sap.ui.layout.form:fields>
