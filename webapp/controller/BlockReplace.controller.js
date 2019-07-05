@@ -11,10 +11,10 @@ sap.ui.define([
 
 			//instantiate view model and set to view
 			this.oViewModel = new JSONModel({
+				btnContinueWoStatusChangeVisible: false,
+				btnToggleCardStatusVisible: false,
 				bCardValidationFailed: false,
 				btnReplaceCardEnabled: false,
-				cboxNextActionVisible: false,
-				cboxNextActionEnabled: false,
 				isOldUI5Version: false,
 				bCardConfirmed: false,
 				busyDelay: 0,
@@ -88,11 +88,13 @@ sap.ui.define([
 			//initialize view model properties
 			this.getModel("ViewModel").setProperty("/bCardConfirmed", false);
 			this.getModel("ViewModel").setProperty("/bCardValidationFailed", false);
-			this.getModel("ViewModel").setProperty("/cboxNextActionVisible", false);
 			this.getModel("ViewModel").setProperty("/btnReplaceCardEnabled", false);
 			this.getModel("ViewModel").setProperty("/btnScanConfirmCardVisible", true);
 			this.getModel("ViewModel").setProperty("/btnScanReplaceCardVisible", true);
 			this.getModel("ViewModel").setProperty("/inputReplacementCardIDEnabled", true);
+			this.getModel("ViewModel").setProperty("/btnToggleCardStatusVisible", true);
+			this.getModel("ViewModel").setProperty("/btnToggleCardStatusEmphasized", true );
+			this.getModel("ViewModel").setProperty("/btnContinueWoStatusChangeVisible", false);
 
 			//set loyalty card query model to view
 			this.oLoyaltyCardConfirmModel = new JSONModel(oLoyaltyCardQuery);
@@ -465,11 +467,13 @@ sap.ui.define([
 					//card is currently 'Active'
 					case "Active":
 						this.getModel("ViewModel").setProperty("/toggleCardStatusButtonText", this.getResourceBundle().getText("textButtonBlockCard"));
+						this.getModel("ViewModel").setProperty("/btnContinueWoStatusChangeVisible", false);
 						break;
 
 						//card is currently 'Blocked'
 					case "Blocked":
 						this.getModel("ViewModel").setProperty("/toggleCardStatusButtonText", this.getResourceBundle().getText("textButtonUnblockCard"));
+						this.getModel("ViewModel").setProperty("/btnContinueWoStatusChangeVisible", true);
 						break;
 
 				}
@@ -549,9 +553,10 @@ sap.ui.define([
 
 		//on completion of card action wizard step
 		completeWizstepCardAction: function(oEvent) {
-
-			//disable action select control
-			this.getModel("ViewModel").setProperty("/cboxNextActionEnabled", false);
+			
+			//set status toggle button to invisible
+			this.getModel("ViewModel").setProperty("/btnToggleCardStatusVisible", false);
+			this.getModel("ViewModel").setProperty("/btnContinueWoStatusChangeVisible", false);
 
 			//hide message strip as it might have be visible after card action
 			this.oMessageStrip.setVisible(false);
@@ -575,11 +580,6 @@ sap.ui.define([
 		//continue without card status change
 		continueWithoutCardStatusChange: function() {
 
-			//set 'Replace card' as next action
-			this.getModel("ViewModel").setProperty("/cboxNextActionEnabled", true);
-			this.getModel("ViewModel").setProperty("/cboxNextActionVisible", true);
-			this.getView().byId("cboxNextAction").setSelectedKey("1"); //Replace card
-
 			//get card action wizard step instance
 			var oCardActionWizStep = this.getView().byId("wizstepCardAction");
 
@@ -595,6 +595,9 @@ sap.ui.define([
 
 			//validate card action wizard step
 			this.oBlockReplaceWizard.validateStep(oCardActionWizStep);
+			
+			//go to verify One Time Pin wizard step
+			this.oBlockReplaceWizard.nextStep();
 
 		},
 
@@ -663,6 +666,10 @@ sap.ui.define([
 						return;
 
 					}
+					
+					//set status toggle button to invisible
+					this.getModel("ViewModel").setProperty("/btnToggleCardStatusVisible", false);
+					this.getModel("ViewModel").setProperty("/btnContinueWoStatusChangeVisible", false);
 
 					//get loyalty card acted on in current state
 					oLoyaltyCard = this.getView().getBindingContext("LoyaltyModel").getObject();
@@ -671,55 +678,37 @@ sap.ui.define([
 					var oLoyaltyCardTrackerModel = this.getModel("LoyaltyCardTrackerModel");
 					oLoyaltyCardTrackerModel.setProperty("/LoyaltyCards", [oLoyaltyCard]);
 
-					//show and enable next action combo box					
-					this.getModel("ViewModel").setProperty("/cboxNextActionEnabled", true);
-					this.getModel("ViewModel").setProperty("/cboxNextActionVisible", true);
-
 					//set next action and next step
 					switch (sCardStatus) {
 
 						//card was activated, proceed to finish	
 						case "Active":
 
-							//exclude replace action for an active card
-							this.getView().byId("cboxNextAction").getBinding("items").filter(
-								new sap.ui.model.Filter({
-									path: 'NextActionID',
-									operator: "NE",
-									value1: "1"
-								}));
-
-							//set 'Finish up' as next action
-							this.getView().byId("cboxNextAction").setSelectedKey("2"); //Replace card
-
 							//set 'Replace card' as next step
 							oCardActionWizStep.setNextStep(this.getView().byId("wizstepFinishUp"));
-
+							
 							break;
 
 							//card was blocked, proceed to replace
 						case "Blocked":
 
-							//unfilter to ensure that all are displayed
-							this.getView().byId("cboxNextAction").getBinding("items").filter([]);
-
-							//set 'Replace card' as next action
-							this.getView().byId("cboxNextAction").setSelectedKey("1"); //Replace card
-
 							//set 'Replace card' as next step
 							oCardActionWizStep.setNextStep(this.getView().byId("wizstepReplaceCard"));
-
+							
 							break;
 					}
 
 					//validate card action wizard step
 					this.oBlockReplaceWizard.validateStep(oCardActionWizStep);
-
+					
 					//message handling: updated successfully
 					this.sendStripMessage(this.getResourceBundle().getText("messageCardUpdateSuccessful"), sap.ui.core.MessageType.Success);
 
 					//set view to no longer busy
 					this.getModel("ViewModel").setProperty("/isViewBusy", false);
+					
+					//go to next ('finish up' or 'replace card') wizard step 
+					this.oBlockReplaceWizard.nextStep();
 
 				}.bind(this),
 
@@ -930,6 +919,26 @@ sap.ui.define([
 
 			//get verify One Time PIN wizard step
 			var oVerifyOneTimePinWizStep = this.getView().byId("wizstepVerifyOneTimePin");
+			
+			//get loyalty card currently being processed
+			var oLoyaltyCard = this.getView().getBindingContext("LoyaltyModel").getObject();
+			
+			//set UI element style classes based on card status
+			switch(oLoyaltyCard.CardStatus){
+				
+				//for an active loyalty card
+				case "Active":
+					this.getView().byId("btnToggleCardStatus").removeStyleClass("sapUiTinyMarginTop");
+					this.getView().byId("btnToggleCardStatus").addStyleClass("sapUiMediumMarginTop");
+					break;
+					
+				//for a blocked loyalty card
+				case "Blocked":
+					this.getView().byId("btnToggleCardStatus").removeStyleClass("sapUiMediumMarginTop");
+					this.getView().byId("btnToggleCardStatus").addStyleClass("sapUiTinyMarginTop");
+					break;
+					
+			}
 
 			//validate verify One Time Pin wizard step
 			this.oBlockReplaceWizard.validateStep(oVerifyOneTimePinWizStep);

@@ -96,7 +96,8 @@
 				"settings": {
 					"defaultOperationMode": "Server",
 					"defaultBindingMode": "OneWay",
-					"defaultCountMode": "Request"
+					"defaultCountMode": "Request",
+					"tokenHandling": false
 				},
 				"dataSource": "LOY_BLOCKREPLACE_SRV",
 				"preload": true

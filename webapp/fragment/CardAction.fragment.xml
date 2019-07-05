@@ -21,21 +21,13 @@
 							</GenericTile>
 						</sap.ui.layout.form:fields>
 					</sap.ui.layout.form:FormElement>
-					<sap.ui.layout.form:FormElement visible="{= ${ViewModel>/cboxNextActionVisible} === true? false : true }">
-						<HBox>
-							<Button text="{ViewModel>/toggleCardStatusButtonText}" press="toggleCardStatus" width="140px" type="Emphasized"
-								class="sapUiMediumMarginTop"/>
-							<Button text="{i18n>textButtonContinueWithoutStatusChange}" press="continueWithoutCardStatusChange" width="140px" type="Transparent"
-								class="sapUiMediumMarginTop sapUiLargeMarginBegin" visible="{= ${LoyaltyModel>CardStatus} === 'Blocked'? true : false }"/>
-						</HBox>
-					</sap.ui.layout.form:FormElement>
-					<sap.ui.layout.form:FormElement visible="{ViewModel>/cboxNextActionVisible}">
-						<ActionSelect id="cboxNextAction" items="{OptionsModel>/NextActions}" width="200px" change="onNextActionChange"
-							visible="{ViewModel>/cboxNextActionEnabled}" class="sapUiMediumMarginTop">
-							<items>
-								<core:ListItem key="{OptionsModel>NextActionID}" text="{OptionsModel>NextActionText}"/>
-							</items>
-						</ActionSelect>
+					<sap.ui.layout.form:FormElement>
+						<VBox>
+							<Button text="{i18n>textButtonContinueWithoutStatusChange}" press="continueWithoutCardStatusChange" width="140px" type="Emphasized"
+								class="sapUiMediumMarginTop" visible="{ViewModel>/btnContinueWoStatusChangeVisible}"/>
+							<Button id="btnToggleCardStatus" text=" {ViewModel>/toggleCardStatusButtonText}" press="toggleCardStatus" width="140px"
+								type="{= ${LoyaltyModel>CardStatus} === 'Active'? 'Emphasized' : 'Transparent' }" visible="{ViewModel>/btnToggleCardStatusVisible}"/>
+						</VBox>
 					</sap.ui.layout.form:FormElement>
 				</sap.ui.layout.form:formElements>
 			</sap.ui.layout.form:FormContainer>
