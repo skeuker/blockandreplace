@@ -356,7 +356,7 @@ sap.ui.define([
 			var aActionControl = [];
 
 			//get all fields in this form
-			var aControls = this.getFormFields(oForm);
+			var aControls = this.getFormFields(oForm, true);
 
 			//reduce all form fields to take action
 			aControls.forEach(function (item) {

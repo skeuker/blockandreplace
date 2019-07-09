@@ -17,7 +17,8 @@
 							<HBox>
 								<Input id="inputLoyaltyCardID" placeholder="{i18n>inputPlaceHolderCardID}" value="{LoyaltyCardConfirmModel>/LoyaltyCardID}" width="160px"
 									maxLength="16" liveChange="onCardConfirmLiveChange" type="Number"/>
-								<ndc:BarcodeScannerButton id="bscanConfirmCard" provideFallback="false" scanSuccess="onConfirmCardScanSuccessful" visible="{ViewModel>/btnScanConfirmCardVisible}"/>
+								<ndc:BarcodeScannerButton id="bscanConfirmCard" provideFallback="false" scanSuccess="onConfirmCardScanSuccessful"
+									visible="{ViewModel>/btnScanConfirmCardVisible}"/>
 							</HBox>
 						</sap.ui.layout.form:fields>
 					</sap.ui.layout.form:FormElement>
@@ -39,8 +40,10 @@
 							<Label required="true" text="{i18n>labelIDNumber}" width="100%" wrapping="true"/>
 						</sap.ui.layout.form:label>
 						<sap.ui.layout.form:fields>
-							<Input id="inputIDNumber" placeholder="{i18n>inputPlaceHolderIDNumber}" value="{LoyaltyCardConfirmModel>/IDNumber}" width="200px"
-								liveChange="onCardConfirmLiveChange" enabled="true" type="{= ${LoyaltyCardConfirmModel>/IDType} === 'Z00002' ? 'Number' : 'Text' }"/>
+							<Input id="inputIDNumber"
+								placeholder="{= ${LoyaltyCardConfirmModel>/IDType} === 'Z00002' ? ${i18n>inputPlaceHolderIDNumber} : ${i18n>inputPlaceHolderPassportNumber} }"
+								value="{LoyaltyCardConfirmModel>/IDNumber}" width="230px" liveChange="onCardConfirmLiveChange" enabled="true"
+								type="{= ${LoyaltyCardConfirmModel>/IDType} === 'Z00002' ? 'Number' : 'Text' }"/>
 						</sap.ui.layout.form:fields>
 					</sap.ui.layout.form:FormElement>
 					<sap.ui.layout.form:FormElement
@@ -49,7 +52,7 @@
 							<Label required="false" textAlign="Left"/>
 						</sap.ui.layout.form:label>
 						<sap.ui.layout.form:fields>
-							<Button text="{i18n>textButtonConfirmCard}" press="confirmCard" width="140px" type="Emphasized"
+							<Button id="btnConfirmCard" text="{i18n>textButtonConfirmCard}" press="confirmCard" width="140px" type="Emphasized"
 								class="sapUiSmallMarginTop"/>
 						</sap.ui.layout.form:fields>
 					</sap.ui.layout.form:FormElement>

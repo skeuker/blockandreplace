@@ -109,6 +109,9 @@ sap.ui.define([
 			//set card confirmation form to editable
 			this.setFormInputControlsEnabled([this.getView().byId("formConfirmCardAttributes")], true);
 
+			//set card confirmation action controls to enabled
+			this.setFormActionControlsEnabled([this.getView().byId("formConfirmCardAttributes")], true);
+
 			//set SA ID type as selected ID type
 			this.getView().byId("cboxIdentificationType").setSelectedKey("Z00002");
 
