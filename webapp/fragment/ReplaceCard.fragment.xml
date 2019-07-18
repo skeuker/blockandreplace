@@ -54,7 +54,7 @@
 							<VBox>
 								<Button text="{i18n>textButtonReplaceCard}" press="replaceCard" width="140px" type="Emphasized" class="sapUiSmallMarginTop"
 									enabled="{ViewModel>/btnReplaceCardEnabled}"/>
-								<Button text="{i18n>textButtonEndWithoutReplace}" press="onPressResetBlockAndReplaceWizard" width="140px" type="Transparent"
+								<Button text="{i18n>textButtonEndWithoutReplace}" press="onPressDoneWithoutReplaceButton" width="140px" type="Transparent"
 									class="sapUiTinyMarginTop"/>
 							</VBox>
 						</sap.ui.layout.form:fields>
