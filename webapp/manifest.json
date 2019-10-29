@@ -1,5 +1,5 @@
 {
-	"_version": "1.5.0",
+	"_version": "1.5.1",
 	"sap.app": {
 		"id": "pnp.blockandreplace",
 		"type": "application",
@@ -141,6 +141,10 @@
 	},
 	"sap.platform.abap": {
 		"uri": "/sap/bc/ui5_ui5/pnp/blockreplace/webapp",
+		"_version": "1.1.0"
+	},
+	"sap.platform.hcp": {
+		"uri": "webapp",
 		"_version": "1.1.0"
 	}
 }

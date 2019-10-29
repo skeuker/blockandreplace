@@ -1,0 +1,35 @@
+{
+    "application": {
+        "id": "",
+        "title": "pnp.blockandreplace",
+        "description": "Block and Replace",
+        "type": "SAP_UI5_Component",
+        "componentUrl": "/",
+        "appUrl": "#blockandreplace-Display",
+        "navigationComponentName": "pnp.blockandreplace",
+        "intentSemanticObject": "blockandreplace",
+        "intentAction": "Display",
+        "html5ApplicationName": "blockandreplace",
+        "HCPParentApplicationName": ""
+    },
+    "assignment": {
+        "groups": [
+            "108f8b7d-5b20-4f9a-8b51-02ab4f369555-1572334018382"
+        ],
+        "contentPackages": [
+            "4f2b7aad-e4b3-4d2d-a0c2-24f502e31fb9-1572333947090"
+        ],
+        "categories": []
+    },
+    "tile": {
+        "type": "StaticTile",
+        "title": "Block & Replace",
+        "subtitle": "smart shopper Card",
+        "searchKeywords": "Block & Replace,smart shopper Card",
+        "displayIconUrl": "sap-icon://credit-card",
+        "displayInfoText": "",
+        "size": "1x1",
+        "serviceURL": "",
+        "refreshInterval": ""
+    }
+}
